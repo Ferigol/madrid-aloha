@@ -125,9 +125,9 @@ export default function Hero() {
 
           <div className="mt-14 pt-10 border-t border-cream/15 grid grid-cols-3 gap-4 sm:gap-10 md:gap-20 w-full max-w-lg">
             {[
-              { num: "+500", label: "Estudiantes alojados" },
-              { num: "+200", label: "Propiedades gestionadas" },
-              { num: "10+", label: "Años en Madrid" },
+              { num: "+772", label: "Estudiantes alojados" },
+              { num: "+221", label: "Empresarios y trabajadores" },
+              { num: "+12", label: "Años de experiencia" },
             ].map((s) => (
               <div key={s.label} className="flex flex-col items-center">
                 <p className="font-kondolar text-2xl sm:text-3xl md:text-4xl font-black text-primary">{s.num}</p>
