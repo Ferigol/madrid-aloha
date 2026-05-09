@@ -14,7 +14,7 @@ export default function HeroStats() {
               <p className="font-kondolar text-4xl sm:text-5xl md:text-6xl font-black text-primary leading-none">
                 {s.num}
               </p>
-              <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-ink/40 mt-3 leading-relaxed whitespace-pre-line">
+              <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-primary mt-3 leading-relaxed whitespace-pre-line">
                 {s.label}
               </p>
             </div>
