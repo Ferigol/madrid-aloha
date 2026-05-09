@@ -20,6 +20,31 @@ export const metadata: Metadata = {
   description:
     "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid. Servicios de hospedaje, gestión de propiedades y limpieza.",
   keywords: "hospedaje Madrid, habitación Madrid, piso Madrid, estudiantes Madrid, Aloha Home",
+  metadataBase: new URL("https://madridaloha.vercel.app"),
+  openGraph: {
+    title: "Madrid Aloha — Tu hogar en Madrid",
+    description:
+      "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid.",
+    url: "https://madridaloha.vercel.app",
+    siteName: "Madrid Aloha",
+    images: [
+      {
+        url: "/image-aloha-home.jpg",
+        width: 1200,
+        height: 800,
+        alt: "Madrid Aloha — Tu hogar en Madrid",
+      },
+    ],
+    locale: "es_ES",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Madrid Aloha — Tu hogar en Madrid",
+    description:
+      "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid.",
+    images: ["/image-aloha-home.jpg"],
+  },
 };
 
 export default function RootLayout({

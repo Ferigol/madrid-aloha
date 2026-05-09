@@ -19,11 +19,9 @@ export default function Universities() {
 
       {/* Label */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-16 pb-10">
-        <div className="flex items-center gap-4">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-cream/60 font-medium">
-            Universidades aliadas
-          </p>
-        </div>
+        <p className="text-[10px] uppercase tracking-[0.25em] text-cream/60 font-medium text-center">
+          Universidades aliadas
+        </p>
       </div>
 
       {/* Marquee — full bleed, CSS animation for seamless loop */}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 const options = [
   "Busco habitación / piso",
@@ -161,23 +162,27 @@ export default function Contact() {
             <h3 className="font-kondolar text-4xl md:text-5xl font-black uppercase tracking-tight leading-[0.95] mb-8">
               ¿Tu casa en Madrid?
             </h3>
-            <p className="text-base md:text-lg text-cream/70 leading-relaxed mb-12 max-w-xs">
+            <p className="text-base md:text-lg text-cream/70 leading-relaxed max-w-xs mb-8">
               Cuéntanos qué necesitas y te respondemos en menos de 24 horas.
             </p>
 
-            <div className="space-y-6">
-              {[
-                { label: "Email", value: "madrid@madridaloha.com" },
-                { label: "Teléfono", value: "+34 604 378 361" },
-                { label: "Dirección", value: "Los Madroños 22, Madrid" },
-              ].map((item) => (
-                <div key={item.label}>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-cream/40 mb-1">
-                    {item.label}
-                  </p>
-                  <p className="text-base md:text-lg font-medium text-cream">{item.value}</p>
-                </div>
-              ))}
+            <div className="flex items-center gap-4">
+              <a
+                href="https://wa.me/34604378361"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200"
+              >
+                <FaWhatsapp size={18} />
+              </a>
+              <a
+                href="mailto:madrid@madridaloha.com"
+                aria-label="Email"
+                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200"
+              >
+                <FaEnvelope size={18} />
+              </a>
             </div>
           </div>
 

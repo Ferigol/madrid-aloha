@@ -152,25 +152,26 @@ export default function Team() {
     <section id="equipo" className="bg-cream text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
-        <div className="flex items-center gap-4 border-b border-ink/10 pb-6 mb-20">
-          <h2 className="text-[10px] uppercase tracking-[0.25em] text-ink/50 font-medium">
-            El equipo
-          </h2>
-        </div>
+        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-28">
 
-        <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-28">
+          {/* Texto: solo visible en móvil, encima de las fotos */}
+          <p className="lg:hidden text-base text-ink/60 font-light leading-relaxed">
+            Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
+          </p>
 
+          {/* Fotos */}
           <div className="flex gap-4 md:gap-6 flex-shrink-0">
             {members.map((m, i) => (
               <PhotoCard key={m.id} member={m} offset={photoOffsets[i]} hoveredId={hoveredId} onHover={handleHover} />
             ))}
           </div>
 
+          {/* Columna derecha: texto (solo desktop) + nombres */}
           <div className="flex flex-col pt-2 flex-1">
-            <p className="text-base md:text-lg text-ink/60 font-light leading-relaxed max-w-md">
+            <p className="hidden lg:block text-base md:text-lg text-ink/60 font-light leading-relaxed max-w-md">
               Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
             </p>
-            <div className="flex flex-col gap-12 mt-16">
+            <div className="flex flex-col gap-12 mt-8 lg:mt-16">
               {members.map((m) => (
                 <MemberRow key={m.id} member={m} hoveredId={hoveredId} onHover={handleHover} />
               ))}

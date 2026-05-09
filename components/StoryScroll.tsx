@@ -67,7 +67,7 @@ export default function StoryScroll({ children }: { children: React.ReactNode })
               ScrollTrigger.create({
                 trigger: section,
                 start: 'top 64px',
-                end: 'bottom top',
+                end: 'bottom 64px',
                 pin: true,
                 pinSpacing: false,
               }),
