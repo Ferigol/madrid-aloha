@@ -86,14 +86,10 @@ const MemberRow = memo(function MemberRow({
       onMouseLeave={() => onHover(null)}
     >
       <div className="flex items-center gap-4 mb-2">
-        <span
-          className="h-px bg-primary flex-shrink-0"
-          style={{ width: isActive ? "2rem" : "1rem", opacity: isActive ? 1 : 0.35, transition: "width 0.4s ease, opacity 0.4s ease" }}
-        />
         <h3
-          className="font-kondolar text-4xl md:text-5xl font-black leading-none tracking-tight"
+          className="font-kondolar text-4xl md:text-[42px] font-black leading-none tracking-tight"
           style={{
-            color: isActive ? "var(--color-ink)" : "color-mix(in srgb, var(--color-ink) 45%, transparent)",
+            color: isActive ? "var(--color-primary)" : "color-mix(in srgb, var(--color-ink) 45%, transparent)",
             transition: "color 0.3s ease",
           }}
         >
@@ -101,26 +97,31 @@ const MemberRow = memo(function MemberRow({
         </h3>
       </div>
 
-      <p className="text-[10px] uppercase tracking-[0.25em] text-ink/40 mb-4 pl-8">
-        {member.role}
-      </p>
+      <div className="flex items-center gap-4 pl-8 mb-4">
+        <p
+          className="text-base uppercase tracking-[0.25em] transition-colors duration-300"
+          style={{ color: isActive ? "var(--color-primary)" : "color-mix(in srgb, var(--color-ink) 40%, transparent)" }}
+        >
+          {member.role}
+        </p>
 
-      <div
-        className="flex items-center gap-2 pl-8"
-        style={{
-          opacity: isActive ? 1 : 0,
-          transform: isActive ? "translateX(0)" : "translateX(-8px)",
-          pointerEvents: isActive ? "auto" : "none",
-          transition: "opacity 0.3s ease, transform 0.3s ease",
-        }}
-      >
+        <div
+          className="flex items-center gap-2"
+          style={{
+            opacity: isActive ? 1 : 0,
+            transform: isActive ? "translateX(0)" : "translateX(-8px)",
+            pointerEvents: isActive ? "auto" : "none",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+          }}
+        >
         {member.social.linkedin && (
           <a
             href={member.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="p-2 border border-ink/20 text-ink/50 hover:text-ink hover:border-ink/50 transition-colors duration-200"
+            className="p-2 transition-colors duration-200"
+            style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
             aria-label="LinkedIn"
           >
             <FaLinkedinIn size={12} />
@@ -130,12 +131,14 @@ const MemberRow = memo(function MemberRow({
           <a
             href={`mailto:${member.social.email}`}
             onClick={(e) => e.stopPropagation()}
-            className="p-2 border border-ink/20 text-ink/50 hover:text-ink hover:border-ink/50 transition-colors duration-200"
+            className="p-2 transition-colors duration-200"
+            style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
             aria-label="Email"
           >
             <FaEnvelope size={12} />
           </a>
         )}
+        </div>
       </div>
     </div>
   );
@@ -146,11 +149,10 @@ export default function Team() {
   const handleHover = useCallback((id: string | null) => setHoveredId(id), []);
 
   return (
-    <section className="bg-cream text-ink">
+    <section id="equipo" className="bg-cream text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
         <div className="flex items-center gap-4 border-b border-ink/10 pb-6 mb-20">
-          <span className="w-8 h-px bg-primary" />
           <h2 className="text-[10px] uppercase tracking-[0.25em] text-ink/50 font-medium">
             El equipo
           </h2>
@@ -164,10 +166,15 @@ export default function Team() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-12 pt-2 flex-1">
-            {members.map((m) => (
-              <MemberRow key={m.id} member={m} hoveredId={hoveredId} onHover={handleHover} />
-            ))}
+          <div className="flex flex-col pt-2 flex-1">
+            <p className="text-base md:text-lg text-ink/60 font-light leading-relaxed max-w-md">
+              Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
+            </p>
+            <div className="flex flex-col gap-12 mt-16">
+              {members.map((m) => (
+                <MemberRow key={m.id} member={m} hoveredId={hoveredId} onHover={handleHover} />
+              ))}
+            </div>
           </div>
 
         </div>

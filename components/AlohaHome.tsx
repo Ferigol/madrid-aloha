@@ -35,7 +35,7 @@ export default function AlohaHome() {
   const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   return (
-    <section ref={ref} id="aloha-home" className="bg-ink text-cream">
+    <section ref={ref} id="aloha-home" className="bg-cream text-ink min-h-screen flex flex-col justify-center">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
@@ -60,7 +60,7 @@ export default function AlohaHome() {
             </motion.h3>
 
             <motion.p
-              className="text-base md:text-lg text-cream/60 leading-relaxed mb-12 max-w-md"
+              className="text-base md:text-lg text-ink/60 leading-relaxed mb-12 max-w-md"
               initial={{ y: 60, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.6, ease }}
@@ -81,10 +81,10 @@ export default function AlohaHome() {
                     {b.num}
                   </span>
                   <div>
-                    <h4 className="text-sm font-semibold uppercase tracking-wide text-cream mb-1.5">
+                    <h4 className="text-sm font-semibold uppercase tracking-wide text-ink mb-1.5">
                       {b.title}
                     </h4>
-                    <p className="text-base md:text-lg leading-relaxed text-cream/50">
+                    <p className="text-base md:text-lg leading-relaxed text-ink/50">
                       {b.desc}
                     </p>
                   </div>
@@ -99,16 +99,15 @@ export default function AlohaHome() {
             >
               <Link
                 href="#contacto"
-                className="inline-flex items-center gap-3 bg-primary text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-cream hover:text-primary transition-colors duration-300 group"
+                className="btn-gradient bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-colors duration-300"
               >
                 Buscar mi piso ahora
-                <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
             </motion.div>
           </div>
 
           {/* RIGHT: image */}
-          <div className="relative w-full aspect-[3/4] lg:aspect-auto lg:h-[700px] overflow-hidden">
+          <div className="relative w-full aspect-[3/4] lg:aspect-auto lg:h-[700px]" style={{ overflow: 'clip' }}>
             <motion.div
               className="absolute inset-0"
               initial={{ y: 80, opacity: 0 }}

@@ -74,3 +74,9 @@ h4,
 .animate-line-reveal-2 {
   animation: line-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
 }
+
+.btn-gradient:hover {
+  background-image: none;
+  background-color: var(--color-cream);
+  color: var(--color-primary);
+}

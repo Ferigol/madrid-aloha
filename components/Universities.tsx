@@ -15,13 +15,12 @@ const doubled = [...logos, ...logos];
 
 export default function Universities() {
   return (
-    <section className="bg-cream border-t border-ink/10">
+    <section className="bg-primary">
 
       {/* Label */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-16 pb-10">
         <div className="flex items-center gap-4">
-          <span className="w-8 h-px bg-primary" />
-          <p className="text-[10px] uppercase tracking-[0.25em] text-ink/40 font-medium">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-cream/60 font-medium">
             Universidades aliadas
           </p>
         </div>
@@ -36,7 +35,7 @@ export default function Universities() {
               <img
                 src={logo.src}
                 alt={logo.alt}
-                style={{ height: "51px" }}
+                style={{ height: "51px", filter: "brightness(0) invert(1) sepia(0.08) brightness(0.87)" }}
                 className="w-auto object-contain"
               />
             </div>

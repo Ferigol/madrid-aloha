@@ -45,19 +45,6 @@ export default function Testimonials() {
     <section className="bg-cream">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
-        {/* Header */}
-        <div className="flex items-end justify-between border-b border-ink/10 pb-6 mb-24">
-          <div className="flex items-center gap-4">
-            <span className="w-8 h-px bg-primary" />
-            <h2 className="text-[10px] uppercase tracking-[0.25em] text-ink/50 font-medium">
-              Lo que dicen
-            </h2>
-          </div>
-          <span className="text-[10px] uppercase tracking-[0.15em] text-ink/30 hidden md:block">
-            Testimonios reales
-          </span>
-        </div>
-
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((t) => (

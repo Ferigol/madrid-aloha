@@ -128,7 +128,7 @@ export default function Contact() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    dialCode: "+34",
+    dialCode: "",
     phone: "",
     type: "",
     message: "",
@@ -155,16 +155,6 @@ export default function Contact() {
   return (
     <section id="contacto" className="bg-primary text-cream">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
-        {/* Header */}
-        <div className="flex items-end justify-between border-b border-cream/20 pb-6 mb-16">
-          <div className="flex items-center gap-4">
-            <span className="w-8 h-px bg-cream/40" />
-            <h2 className="text-[10px] uppercase tracking-[0.25em] text-cream/50 font-medium">
-              Contacto
-            </h2>
-          </div>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Left: Info */}
           <div className="lg:col-span-4">
@@ -208,24 +198,18 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Nombre */}
                   <div>
-                    <label className="block text-[10px] uppercase tracking-[0.2em] text-cream/50 mb-2">
-                      Nombre completo
-                    </label>
                     <input
                       required
                       type="text"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream placeholder:text-cream/30 focus:outline-none focus:border-cream transition-colors"
+                      className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none focus:border-cream transition-colors"
                       placeholder="Tu nombre"
                     />
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label className="block text-[10px] uppercase tracking-[0.2em] text-cream/50 mb-2">
-                      Email <span className="normal-case tracking-normal text-cream/40 ml-1">— debe incluir @</span>
-                    </label>
                     <input
                       required
                       type="text"
@@ -235,10 +219,10 @@ export default function Contact() {
                         validateEmail(e.target.value);
                       }}
                       onBlur={() => validateEmail(form.email)}
-                      className={`w-full bg-transparent border-b pb-3 text-base md:text-lg text-cream placeholder:text-cream/30 focus:outline-none transition-colors ${
+                      className={`w-full bg-transparent border-b pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none transition-colors ${
                         emailError ? "border-red-300 focus:border-red-300" : "border-cream/30 focus:border-cream"
                       }`}
-                      placeholder="tu@email.com"
+                      placeholder="Tu correo aquí"
                     />
                     {emailError && (
                       <p className="mt-2 text-[10px] uppercase tracking-[0.15em] text-red-300">
@@ -250,15 +234,13 @@ export default function Contact() {
 
                 {/* Teléfono */}
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-cream/50 mb-2">
-                    Teléfono
-                  </label>
                   <div className="flex items-end gap-3 border-b border-cream/30 pb-3 focus-within:border-cream transition-colors">
                     <select
                       value={form.dialCode}
                       onChange={(e) => setForm({ ...form, dialCode: e.target.value })}
                       className="bg-transparent text-base md:text-lg text-cream focus:outline-none appearance-none cursor-pointer shrink-0 max-w-[180px]"
                     >
+                      <option value="" disabled className="text-ink bg-white">Prefijo país</option>
                       {countryCodes.map((c) => (
                         <option key={c.name} value={c.dial} className="text-ink bg-white">
                           {c.name} ({c.dial})
@@ -270,17 +252,14 @@ export default function Contact() {
                       type="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="flex-1 bg-transparent text-base md:text-lg text-cream placeholder:text-cream/30 focus:outline-none min-w-0"
-                      placeholder="600 000 000"
+                      className="flex-1 bg-transparent text-base md:text-lg text-cream placeholder:text-cream focus:outline-none min-w-0"
+                      placeholder="Tu número"
                     />
                   </div>
                 </div>
 
                 {/* ¿Qué necesitas? */}
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-cream/50 mb-2">
-                    ¿Qué necesitas?
-                  </label>
                   <select
                     required
                     value={form.type}
@@ -288,7 +267,7 @@ export default function Contact() {
                     className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream focus:outline-none focus:border-cream transition-colors appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="text-ink">
-                      Selecciona una opción
+                      ¿Qué necesitas?
                     </option>
                     {options.map((o) => (
                       <option key={o} value={o} className="text-ink">
@@ -300,23 +279,21 @@ export default function Contact() {
 
                 {/* Mensaje */}
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.2em] text-cream/50 mb-2">
-                    Mensaje
-                  </label>
                   <textarea
                     required
                     rows={4}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream placeholder:text-cream/30 focus:outline-none focus:border-cream transition-colors resize-none"
-                    placeholder="Cuéntanos qué buscas, tu presupuesto, fechas..."
+                    className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none focus:border-cream transition-colors resize-none"
+                    placeholder="Tu mensaje aquí..."
                   />
                 </div>
 
                 <div className="pt-4 flex justify-end">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-3 border border-cream/40 text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-cream hover:text-primary transition-all duration-300 group"
+                    className="btn-gradient bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center gap-3 text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-colors duration-300 group"
+                    style={{ border: '2px solid #deddd9' }}
                   >
                     Enviar mensaje
                     <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>

@@ -101,25 +101,18 @@ export default function Hero() {
             )}
           </div>
 
-          <p className="text-base md:text-lg text-cream/80 font-light leading-relaxed max-w-xl mb-12">
-            Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie.
-            Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
-          </p>
-
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="#contacto"
-              className="w-52 whitespace-nowrap inline-flex items-center justify-center gap-3 bg-primary text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-cream hover:text-primary transition-colors duration-300 group"
+              className="btn-gradient bg-gradient-to-r from-[#ce304e] to-[#ce214a] w-52 whitespace-nowrap inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-colors duration-300"
             >
-              Busco piso
-              <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+              Busco casa
             </Link>
             <Link
               href="#aloha-property"
-              className="w-52 whitespace-nowrap inline-flex items-center justify-center gap-3 border border-cream/40 text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-cream hover:text-ink transition-colors duration-300 group"
+              className="w-52 whitespace-nowrap inline-flex items-center justify-center border border-cream text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-cream hover:text-ink transition-colors duration-300"
             >
               Alquilo piso
-              <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
             </Link>
           </div>
 

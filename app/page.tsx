@@ -5,6 +5,7 @@ import AlohaHome from "@/components/AlohaHome";
 import Universities from "@/components/Universities";
 import AlohaProperty from "@/components/AlohaProperty";
 import AlohaCleaning from "@/components/AlohaCleaning";
+import StoryScroll from "@/components/StoryScroll";
 import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
@@ -17,9 +18,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <HeroStats />
-      <AlohaHome />
-      <AlohaProperty />
-      <AlohaCleaning />
+      <StoryScroll>
+        <AlohaHome />
+        <AlohaProperty />
+        <AlohaCleaning />
+      </StoryScroll>
       <Team />
       <Universities />
       <Testimonials />

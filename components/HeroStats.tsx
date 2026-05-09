@@ -67,15 +67,15 @@ export default function HeroStats() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-cream border-b border-ink/10">
+    <section ref={sectionRef} className="bg-primary">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-12">
-        <div className="grid grid-cols-3 divide-x divide-ink/10">
+        <div className="grid grid-cols-3 divide-x divide-cream/20">
           {stats.map((s, i) => (
             <div key={s.label} className="flex flex-col items-center text-center px-4">
-              <p className="font-kondolar text-4xl sm:text-5xl md:text-6xl font-black text-primary leading-none tabular-nums">
+              <p className="font-kondolar text-4xl sm:text-5xl md:text-6xl font-black text-cream leading-none tabular-nums">
                 +{values[i]}
               </p>
-              <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-primary mt-3 leading-relaxed whitespace-pre-line">
+              <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-cream/70 mt-3 leading-relaxed whitespace-pre-line">
                 {s.label}
               </p>
             </div>
