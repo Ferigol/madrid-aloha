@@ -2,16 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Cómo funciona", href: "#como-funciona" },
-  { label: "Propietarios", href: "#propietarios" },
-  { label: "Contacto", href: "#contacto" },
-];
-
-const services = [
-  { label: "Aloha Home", href: "#servicios" },
-  { label: "Aloha Property", href: "#propietarios" },
-  { label: "Aloha Cleaning", href: "#contacto" },
+  { label: "Buscas Casa",  href: "#aloha-home" },
+  { label: "Propietarios", href: "#aloha-property" },
+  { label: "Limpieza",     href: "#aloha-cleaning" },
+  { label: "FAQ",          href: "#faq" },
+  { label: "Contacto",     href: "#contacto" },
 ];
 
 const socials = [
@@ -82,25 +77,6 @@ export default function Footer() {
                     className="text-xs text-cream/60 hover:text-cream transition-colors uppercase tracking-[0.1em]"
                   >
                     {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="md:col-span-2">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-cream/30 mb-5">
-              Servicios
-            </p>
-            <ul className="space-y-3">
-              {services.map((s) => (
-                <li key={s.label}>
-                  <Link
-                    href={s.href}
-                    className="text-xs text-cream/60 hover:text-cream transition-colors uppercase tracking-[0.1em]"
-                  >
-                    {s.label}
                   </Link>
                 </li>
               ))}
