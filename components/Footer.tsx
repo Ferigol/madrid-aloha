@@ -57,11 +57,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-4">
             <Image
-              src="/logo-ma.svg"
+              src="/logo-ma-completo.svg"
               alt="Madrid Aloha"
-              width={40}
-              height={54}
-              className="h-10 w-auto brightness-0 invert mb-6"
+              width={800}
+              height={133}
+              className="h-8 w-auto mb-6"
+              style={{ filter: "brightness(0) invert(1) sepia(0.08) brightness(0.87)" }}
             />
             <p className="text-base md:text-lg text-cream/50 leading-relaxed max-w-xs">
               Ayudamos a estudiantes y trabajadores internacionales a encontrar su hogar en Madrid.
