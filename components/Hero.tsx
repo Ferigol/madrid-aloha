@@ -123,18 +123,6 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="mt-14 pt-10 border-t border-cream/15 grid grid-cols-3 gap-4 sm:gap-10 md:gap-20 w-full max-w-lg">
-            {[
-              { num: "+772", label: "Estudiantes alojados" },
-              { num: "+221", label: "Empresarios y trabajadores" },
-              { num: "+12", label: "Años de experiencia" },
-            ].map((s) => (
-              <div key={s.label} className="flex flex-col items-center">
-                <p className="font-kondolar text-2xl sm:text-3xl md:text-4xl font-black text-primary">{s.num}</p>
-                <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.1em] text-cream/50 mt-1 leading-tight">{s.label}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/30 z-10">

@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import HeroStats from "@/components/HeroStats";
 import AlohaHome from "@/components/AlohaHome";
 import Universities from "@/components/Universities";
 import AlohaProperty from "@/components/AlohaProperty";
@@ -14,6 +15,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
+      <HeroStats />
       <Universities />
       <AlohaHome />
       <AlohaProperty />
