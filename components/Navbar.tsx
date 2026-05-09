@@ -13,6 +13,13 @@ const links = [
   { label: "Contacto", href: "#contacto" },
 ];
 
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 64;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -44,12 +51,13 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-10">
           {links.map((l) => (
             <li key={l.href}>
-              <Link
+              <a
                 href={l.href}
-                className="text-xs uppercase tracking-[0.15em] font-medium text-ink/70 hover:text-primary transition-colors duration-200"
+                onClick={(e) => { e.preventDefault(); scrollToSection(l.href.slice(1)); }}
+                className="text-xs uppercase tracking-[0.15em] font-medium text-ink/70 hover:text-primary transition-colors duration-200 cursor-pointer"
               >
                 {l.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
@@ -94,13 +102,13 @@ export default function Navbar() {
         <ul className="px-6 py-8 flex flex-col gap-7">
           {links.map((l) => (
             <li key={l.href}>
-              <Link
+              <a
                 href={l.href}
-                onClick={() => setOpen(false)}
-                className="text-sm uppercase tracking-[0.15em] font-medium text-ink hover:text-primary transition-colors"
+                onClick={(e) => { e.preventDefault(); scrollToSection(l.href.slice(1)); setOpen(false); }}
+                className="text-sm uppercase tracking-[0.15em] font-medium text-ink hover:text-primary transition-colors cursor-pointer"
               >
                 {l.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>

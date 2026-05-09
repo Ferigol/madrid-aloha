@@ -17,6 +17,15 @@ export default function Hero() {
   const [showTitle2, setShowTitle2] = useState(false);
   const [title2Key,  setTitle2Key]  = useState(0);
 
+  // Prime the video on load: show first frame and unlock seeking on iOS without playing
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const prime = () => { video.play().then(() => video.pause()).catch(() => {}); };
+    video.addEventListener("canplay", prime, { once: true });
+    return () => video.removeEventListener("canplay", prime);
+  }, []);
+
   useEffect(() => {
     const section = sectionRef.current;
     const video   = videoRef.current;
@@ -101,7 +110,7 @@ export default function Hero() {
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col items-center sm:flex-row gap-4">
             <Link
               href="#contacto"
               className="btn-gradient bg-gradient-to-r from-[#ce304e] to-[#ce214a] w-52 whitespace-nowrap inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-colors duration-300"
