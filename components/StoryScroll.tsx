@@ -75,10 +75,32 @@ export default function StoryScroll({ children }: { children: React.ReactNode })
           }
         });
 
+        // GSAP wraps each pinned section in a pin-spacer div that stays in normal
+        // document flow. Moving the section id there ensures getBoundingClientRect()
+        // always returns the real document position, not the fixed viewport position.
+        sections.slice(0, sections.length - 1).forEach((section) => {
+          const pinSpacer = section.parentElement;
+          const innerSection = section.querySelector<HTMLElement>('[id]');
+          if (pinSpacer && innerSection?.id && pinSpacer !== containerRef.current) {
+            pinSpacer.id = innerSection.id;
+            innerSection.removeAttribute('id');
+          }
+        });
+
         ScrollTrigger.refresh();
 
         return () => {
           triggers.forEach((t) => t.kill());
+          // Restore ids to inner sections before GSAP removes pin-spacers
+          sections.slice(0, sections.length - 1).forEach((section) => {
+            const pinSpacer = section.parentElement;
+            if (!pinSpacer?.id) return;
+            const innerSection = section.querySelector<HTMLElement>('section');
+            if (innerSection) {
+              innerSection.id = pinSpacer.id;
+              pinSpacer.removeAttribute('id');
+            }
+          });
           sections.forEach((section) => {
             gsap.set(section, { clearProps: 'zIndex' });
             const inner = section.querySelector<HTMLElement>('.story-inner');
