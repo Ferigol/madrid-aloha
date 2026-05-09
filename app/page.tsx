@@ -5,6 +5,7 @@ import AlohaHome from "@/components/AlohaHome";
 import Universities from "@/components/Universities";
 import AlohaProperty from "@/components/AlohaProperty";
 import AlohaCleaning from "@/components/AlohaCleaning";
+import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
@@ -19,6 +20,7 @@ export default function Home() {
       <AlohaHome />
       <AlohaProperty />
       <AlohaCleaning />
+      <Team />
       <Universities />
       <Testimonials />
       <FAQ />
