@@ -42,7 +42,7 @@ function Stars() {
 
 export default function Testimonials() {
   return (
-    <section className="bg-cream border-t border-ink/10">
+    <section className="bg-cream">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
         {/* Header */}
@@ -74,9 +74,7 @@ export default function Testimonials() {
               </div>
 
               {/* Card */}
-              <div className="w-full bg-cream border border-ink/10 pt-16 pb-8 px-8 text-center"
-                style={{ boxShadow: "0 4px 24px 0 rgba(26,18,8,0.07)" }}
-              >
+              <div className="w-full bg-cream border border-ink/10 pt-16 pb-8 px-8 text-center">
                 <Stars />
 
                 <p className="text-base leading-relaxed text-ink/70 mb-8 font-light">
