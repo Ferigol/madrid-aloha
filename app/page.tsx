@@ -16,10 +16,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <HeroStats />
-      <Universities />
       <AlohaHome />
       <AlohaProperty />
       <AlohaCleaning />
+      <Universities />
       <Testimonials />
       <FAQ />
       <Contact />
