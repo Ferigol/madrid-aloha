@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-
 const faqs = [
   {
     q: "¿Cuánto tiempo tardáis en encontrarme piso o habitación?",
@@ -84,19 +82,6 @@ export default function FAQ() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 pt-10 border-t border-ink/10 flex flex-col md:flex-row md:items-center justify-between gap-6 max-w-3xl mx-auto">
-          <p className="text-base text-ink/50">
-            ¿No encuentras lo que buscas? Escríbenos directamente.
-          </p>
-          <Link
-            href="#contacto"
-            className="inline-flex items-center gap-3 bg-ink text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-primary hover:text-cream transition-colors duration-300 group self-start md:self-auto"
-          >
-            Hablar con el equipo
-            <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
-          </Link>
-        </div>
 
       </div>
     </section>
