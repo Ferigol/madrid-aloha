@@ -169,7 +169,7 @@ export default function Contact() {
           {/* Left: Info */}
           <div className="lg:col-span-4">
             <h3 className="font-kondolar text-4xl md:text-5xl font-black uppercase tracking-tight leading-[0.95] mb-8">
-              ¿Listo para<br />encontrar tu<br />hogar?
+              ¿Encontramos tu casa?
             </h3>
             <p className="text-base md:text-lg text-cream/70 leading-relaxed mb-12 max-w-xs">
               Cuéntanos qué necesitas y te respondemos en menos de 24 horas.
