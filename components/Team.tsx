@@ -2,22 +2,22 @@
 
 import { memo, useCallback, useState } from "react";
 import Image from "next/image";
-import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { FaLinkedinIn, FaEnvelope } from "react-icons/fa";
 
 const members = [
   {
     id: "rebe",
-    name: "Rebeca Vílchez",
-    role: "Co-Fundadora",
+    name: "Rebeca Vilches",
+    role: "Sales Manager",
     image: "/equipo-rebe.jpg",
-    social: { linkedin: "#", instagram: "#" },
+    social: { linkedin: "#", email: "madrid@madridaloha.com" },
   },
   {
     id: "juanca",
     name: "Juan Carlos Taboada",
-    role: "Co-Fundador",
+    role: "Marketing Manager",
     image: "/equipo-juanca.jpg",
-    social: { linkedin: "#", instagram: "#" },
+    social: { linkedin: "#", email: "madrid@madridaloha.com" },
   },
 ];
 
@@ -93,7 +93,7 @@ const MemberRow = memo(function MemberRow({
         <h3
           className="font-kondolar text-4xl md:text-5xl font-black leading-none tracking-tight"
           style={{
-            color: isActive ? "var(--color-cream)" : "color-mix(in srgb, var(--color-cream) 55%, transparent)",
+            color: isActive ? "var(--color-ink)" : "color-mix(in srgb, var(--color-ink) 45%, transparent)",
             transition: "color 0.3s ease",
           }}
         >
@@ -101,7 +101,7 @@ const MemberRow = memo(function MemberRow({
         </h3>
       </div>
 
-      <p className="text-[10px] uppercase tracking-[0.25em] text-cream/40 mb-4 pl-8">
+      <p className="text-[10px] uppercase tracking-[0.25em] text-ink/40 mb-4 pl-8">
         {member.role}
       </p>
 
@@ -120,22 +120,20 @@ const MemberRow = memo(function MemberRow({
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="p-2 border border-cream/20 text-cream/50 hover:text-cream hover:border-cream/50 transition-colors duration-200"
+            className="p-2 border border-ink/20 text-ink/50 hover:text-ink hover:border-ink/50 transition-colors duration-200"
             aria-label="LinkedIn"
           >
             <FaLinkedinIn size={12} />
           </a>
         )}
-        {member.social.instagram && (
+        {member.social.email && (
           <a
-            href={member.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`mailto:${member.social.email}`}
             onClick={(e) => e.stopPropagation()}
-            className="p-2 border border-cream/20 text-cream/50 hover:text-cream hover:border-cream/50 transition-colors duration-200"
-            aria-label="Instagram"
+            className="p-2 border border-ink/20 text-ink/50 hover:text-ink hover:border-ink/50 transition-colors duration-200"
+            aria-label="Email"
           >
-            <FaInstagram size={12} />
+            <FaEnvelope size={12} />
           </a>
         )}
       </div>
@@ -148,12 +146,12 @@ export default function Team() {
   const handleHover = useCallback((id: string | null) => setHoveredId(id), []);
 
   return (
-    <section className="bg-ink text-cream">
+    <section className="bg-cream text-ink">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
-        <div className="flex items-center gap-4 border-b border-cream/10 pb-6 mb-20">
+        <div className="flex items-center gap-4 border-b border-ink/10 pb-6 mb-20">
           <span className="w-8 h-px bg-primary" />
-          <h2 className="text-[10px] uppercase tracking-[0.25em] text-cream/50 font-medium">
+          <h2 className="text-[10px] uppercase tracking-[0.25em] text-ink/50 font-medium">
             El equipo
           </h2>
         </div>
