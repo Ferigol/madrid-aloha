@@ -1,3 +1,12 @@
+"use client";
+
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const testimonials = [
   {
     img: "https://i.pravatar.cc/150?img=47",
@@ -41,17 +50,57 @@ function Stars() {
 }
 
 export default function Testimonials() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    const cards   = sectionRef.current.querySelectorAll("[data-card]");
+    const avatars = sectionRef.current.querySelectorAll("[data-avatar]");
+
+    // Estado inicial
+    gsap.set(cards,   { y: 70, opacity: 0 });
+    gsap.set(avatars, { scale: 0.6, opacity: 0 });
+
+    // Tarjetas: entran escalonadas al hacer scroll
+    ScrollTrigger.batch(cards, {
+      start: "top 88%",
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          ease: "power3.out",
+          stagger: 0.18,
+        }),
+    });
+
+    // Avatares: aparecen con un leve rebote después de sus tarjetas
+    ScrollTrigger.batch(avatars, {
+      start: "top 88%",
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.4)",
+          stagger: 0.18,
+          delay: 0.2,
+        }),
+    });
+  }, { scope: sectionRef });
+
   return (
     <section className="bg-cream">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
+      <div ref={sectionRef} className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((t) => (
-            <div key={t.name} className="relative flex flex-col items-center pt-14">
+            <div key={t.name} data-card className="relative flex flex-col items-center pt-14">
 
               {/* Floating avatar */}
-              <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
+              <div data-avatar className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={t.img}
@@ -64,7 +113,7 @@ export default function Testimonials() {
               <div className="w-full bg-cream border border-ink/10 pt-16 pb-8 px-8 text-center">
                 <Stars />
 
-                <p className="text-base leading-relaxed text-ink/70 mb-8 font-light">
+                <p className="text-base leading-relaxed text-ink mb-8 font-light">
                   "{t.quote}"
                 </p>
 
@@ -72,7 +121,7 @@ export default function Testimonials() {
                   <p className="text-sm font-semibold uppercase tracking-wide text-ink">
                     {t.name}
                   </p>
-                  <p className="text-[10px] uppercase tracking-[0.15em] text-ink/40 mt-1">
+                  <p className="text-[10px] uppercase tracking-[0.15em] text-ink mt-1">
                     {t.role}
                   </p>
                 </div>

@@ -1,7 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const options = [
   "Busco habitación / piso",
@@ -126,6 +131,28 @@ const countryCodes = [
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const formRef    = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current || !formRef.current) return;
+
+    gsap.fromTo(
+      formRef.current,
+      { x: 120, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "top 25%",
+          scrub: 1,
+        },
+      },
+    );
+  }, { scope: sectionRef });
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -154,15 +181,15 @@ export default function Contact() {
   }
 
   return (
-    <section id="contacto" className="bg-primary text-cream">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
+    <section id="contacto" className="bg-primary text-cream" style={{ overflowX: "clip" }}>
+      <div ref={sectionRef} className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Left: Info */}
           <div className="lg:col-span-4">
             <h3 className="font-kondolar text-4xl md:text-5xl font-black uppercase tracking-tight leading-[0.95] mb-8">
               ¿Tu casa en Madrid?
             </h3>
-            <p className="text-base md:text-lg text-cream/70 leading-relaxed max-w-xs mb-8">
+            <p className="text-base md:text-lg text-cream leading-relaxed max-w-xs mb-8">
               Cuéntanos qué necesitas y te respondemos en menos de 24 horas.
             </p>
 
@@ -187,11 +214,11 @@ export default function Contact() {
           </div>
 
           {/* Right: Form */}
-          <div className="lg:col-span-8">
+          <div ref={formRef} className="lg:col-span-8">
             {sent ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
                 <span className="text-6xl font-black text-cream/20 mb-4">✓</span>
-                <h4 className="text-2xl font-black uppercase tracking-tight mb-3">
+                <h4 className="font-kondolar text-2xl font-black uppercase tracking-tight mb-3">
                   Mensaje enviado
                 </h4>
                 <p className="text-base md:text-lg text-cream/60">
@@ -227,7 +254,7 @@ export default function Contact() {
                       className={`w-full bg-transparent border-b pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none transition-colors ${
                         emailError ? "border-red-300 focus:border-red-300" : "border-cream/30 focus:border-cream"
                       }`}
-                      placeholder="Tu correo aquí"
+                      placeholder="Tu correo"
                     />
                     {emailError && (
                       <p className="mt-2 text-[10px] uppercase tracking-[0.15em] text-red-300">
@@ -258,7 +285,7 @@ export default function Contact() {
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       className="flex-1 bg-transparent text-base md:text-lg text-cream placeholder:text-cream focus:outline-none min-w-0"
-                      placeholder="Tu número"
+                      placeholder="Tu móvil"
                     />
                   </div>
                 </div>
@@ -297,8 +324,7 @@ export default function Contact() {
                 <div className="pt-4 flex justify-end">
                   <button
                     type="submit"
-                    className="btn-gradient bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center gap-3 text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-colors duration-300 group"
-                    style={{ border: '2px solid #deddd9' }}
+                    className="bg-ink text-cream inline-flex items-center gap-3 px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80 group"
                   >
                     Enviar mensaje
                     <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>

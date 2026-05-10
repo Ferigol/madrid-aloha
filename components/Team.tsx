@@ -1,8 +1,13 @@
 "use client";
 
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { FaLinkedinIn, FaEnvelope } from "react-icons/fa";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const members = [
   {
@@ -114,30 +119,30 @@ const MemberRow = memo(function MemberRow({
             transition: "opacity 0.3s ease, transform 0.3s ease",
           }}
         >
-        {member.social.linkedin && (
-          <a
-            href={member.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="p-2 transition-colors duration-200"
-            style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
-            aria-label="LinkedIn"
-          >
-            <FaLinkedinIn size={12} />
-          </a>
-        )}
-        {member.social.email && (
-          <a
-            href={`mailto:${member.social.email}`}
-            onClick={(e) => e.stopPropagation()}
-            className="p-2 transition-colors duration-200"
-            style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
-            aria-label="Email"
-          >
-            <FaEnvelope size={12} />
-          </a>
-        )}
+          {member.social.linkedin && (
+            <a
+              href={member.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="p-2 transition-colors duration-200"
+              style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn size={12} />
+            </a>
+          )}
+          {member.social.email && (
+            <a
+              href={`mailto:${member.social.email}`}
+              onClick={(e) => e.stopPropagation()}
+              className="p-2 transition-colors duration-200"
+              style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
+              aria-label="Email"
+            >
+              <FaEnvelope size={12} />
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -148,27 +153,56 @@ export default function Team() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const handleHover = useCallback((id: string | null) => setHoveredId(id), []);
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const photosRef  = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current || !photosRef.current || !contentRef.current) return;
+
+    const triggerConfig = {
+      trigger: sectionRef.current,
+      start: "top 80%",
+      end: "top 25%",
+      scrub: 1,
+    };
+
+    // Fotos: entran de izquierda a derecha
+    gsap.fromTo(
+      photosRef.current,
+      { x: -120, opacity: 0 },
+      { x: 0, opacity: 1, ease: "power2.out", scrollTrigger: triggerConfig },
+    );
+
+    // Textos y nombres: entran de derecha a izquierda
+    gsap.fromTo(
+      contentRef.current,
+      { x: 120, opacity: 0 },
+      { x: 0, opacity: 1, ease: "power2.out", scrollTrigger: triggerConfig },
+    );
+  }, { scope: sectionRef });
+
   return (
-    <section id="equipo" className="bg-cream text-ink">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
+    <section id="equipo" className="bg-cream text-ink" style={{ overflowX: "clip" }}>
+      <div ref={sectionRef} className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
 
         <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-28">
 
           {/* Texto: solo visible en móvil, encima de las fotos */}
-          <p className="lg:hidden text-base text-ink/60 font-light leading-relaxed">
+          <p className="lg:hidden text-base text-ink font-light leading-relaxed">
             Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
           </p>
 
-          {/* Fotos */}
-          <div className="flex gap-4 md:gap-6 flex-shrink-0">
+          {/* Fotos — entra desde la izquierda */}
+          <div ref={photosRef} className="flex gap-4 md:gap-6 flex-shrink-0">
             {members.map((m, i) => (
               <PhotoCard key={m.id} member={m} offset={photoOffsets[i]} hoveredId={hoveredId} onHover={handleHover} />
             ))}
           </div>
 
-          {/* Columna derecha: texto (solo desktop) + nombres */}
-          <div className="flex flex-col pt-2 flex-1">
-            <p className="hidden lg:block text-base md:text-lg text-ink/60 font-light leading-relaxed max-w-md">
+          {/* Columna derecha — entra desde la derecha */}
+          <div ref={contentRef} className="flex flex-col pt-2 flex-1">
+            <p className="hidden lg:block text-base md:text-lg text-ink font-light leading-relaxed max-w-md">
               Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
             </p>
             <div className="flex flex-col gap-12 mt-8 lg:mt-16">

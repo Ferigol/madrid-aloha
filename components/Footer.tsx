@@ -57,7 +57,7 @@ export default function Footer() {
               alt="Madrid Aloha"
               width={800}
               height={133}
-              className="h-8 w-auto mb-6"
+              className="h-[26px] w-auto mb-6"
               style={{ filter: "brightness(0) invert(1) sepia(0.08) brightness(0.87)" }}
             />
             <p className="text-base md:text-lg text-cream/50 leading-relaxed max-w-xs">

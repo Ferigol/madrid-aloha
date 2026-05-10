@@ -19,7 +19,7 @@ export default function Universities() {
 
       {/* Label */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-16 pb-10">
-        <p className="text-[10px] uppercase tracking-[0.25em] text-cream/60 font-medium text-center">
+        <p className="text-[10px] uppercase tracking-[0.25em] text-cream font-medium text-center">
           Universidades aliadas
         </p>
       </div>

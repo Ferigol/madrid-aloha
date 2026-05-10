@@ -66,7 +66,14 @@ export default function StoryScroll({ children }: { children: React.ReactNode })
             triggers.push(
               ScrollTrigger.create({
                 trigger: section,
-                start: 'top 64px',
+                // If section is taller than the available viewport (vh - navbar),
+                // delay the pin until the bottom of the section reaches the viewport
+                // bottom so the full content (including the CTA button) is visible
+                // before the next section starts animating in.
+                start: () => {
+                  const offset = Math.min(64, window.innerHeight - section.offsetHeight);
+                  return `top ${offset}px`;
+                },
                 end: 'bottom 64px',
                 pin: true,
                 pinSpacing: false,

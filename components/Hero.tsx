@@ -113,13 +113,13 @@ export default function Hero() {
           <div className="flex flex-col items-center sm:flex-row gap-4">
             <Link
               href="#contacto"
-              className="btn-gradient bg-gradient-to-r from-[#ce304e] to-[#ce214a] w-52 whitespace-nowrap inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-colors duration-300"
+              className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] w-52 whitespace-nowrap inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium opacity-80 transition-opacity duration-300 hover:opacity-50"
             >
               Busco casa
             </Link>
             <Link
               href="#aloha-property"
-              className="w-52 whitespace-nowrap inline-flex items-center justify-center border border-cream text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium hover:bg-cream hover:text-ink transition-colors duration-300"
+              className="w-52 whitespace-nowrap inline-flex items-center justify-center border border-cream text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300 hover:bg-cream hover:text-ink hover:opacity-50"
             >
               Alquilo piso
             </Link>
