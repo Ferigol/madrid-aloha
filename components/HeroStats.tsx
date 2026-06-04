@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const stats = [
   { target: 772, label: "Estudiantes\nalojados",        delay: 0   },
   { target: 221, label: "Empresarios y\ntrabajadores",  delay: 180 },
-  { target: 12,  label: "Años de\nexperiencia",         delay: 360 },
+  { target: 9,   label: "Años de\nexperiencia",         delay: 360 },
 ];
 
 const DURATION = 1800;

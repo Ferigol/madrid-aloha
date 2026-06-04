@@ -51,12 +51,12 @@ export default function AlohaCleaning() {
             </motion.p>
 
             <motion.h3
-              className="font-kondolar text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-4 lg:mb-6 xl:mb-8"
+              className="font-kondolar text-[43px] md:text-[55px] font-black uppercase tracking-tight leading-[0.9] mb-4 lg:mb-6 xl:mb-8"
               initial={{ y: 60, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.45, ease }}
             >
-              Aloha <span className="text-primary">Cleaning</span>
+              Carta de <span className="text-primary">acomodación</span>
             </motion.h3>
 
             <motion.p
@@ -115,7 +115,7 @@ export default function AlohaCleaning() {
               transition={{ duration: 0.8, ease }}
             >
               <Image
-                src="/hero-ma.jpg"
+                src="/hero-ma.webp"
                 alt="Limpieza profesional en Madrid"
                 fill
                 className="object-cover object-center"

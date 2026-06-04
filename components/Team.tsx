@@ -14,15 +14,15 @@ const members = [
     id: "rebe",
     name: "Rebeca Vilches",
     role: "Sales Manager",
-    image: "/equipo-rebe.jpg",
-    social: { linkedin: "#", email: "madrid@madridaloha.com" },
+    image: "/equipo-rebe.webp",
+    social: { linkedin: "https://www.linkedin.com/in/rebeca-cano-988b98119/", email: "rebeca@madridaloha.com" },
   },
   {
     id: "juanca",
     name: "Juan Carlos Taboada",
     role: "Marketing Manager",
-    image: "/equipo-juanca.jpg",
-    social: { linkedin: "#", email: "madrid@madridaloha.com" },
+    image: "/equipo-juanca.webp",
+    social: { linkedin: "https://www.linkedin.com/in/juancartaboada/", email: "jcarlos@madridaloha.com" },
   },
 ];
 
@@ -92,7 +92,7 @@ const MemberRow = memo(function MemberRow({
     >
       <div className="flex items-center gap-4 mb-2">
         <h3
-          className="font-kondolar text-4xl md:text-[42px] font-black leading-none tracking-tight"
+          className="font-kondolar text-3xl md:text-[34px] font-black leading-none tracking-tight"
           style={{
             color: isActive ? "var(--color-primary)" : "color-mix(in srgb, var(--color-ink) 45%, transparent)",
             transition: "color 0.3s ease",
@@ -102,7 +102,7 @@ const MemberRow = memo(function MemberRow({
         </h3>
       </div>
 
-      <div className="flex items-center gap-4 pl-8 mb-4">
+      <div className="flex items-center gap-4 mb-4">
         <p
           className="text-base uppercase tracking-[0.25em] transition-colors duration-300"
           style={{ color: isActive ? "var(--color-primary)" : "color-mix(in srgb, var(--color-ink) 40%, transparent)" }}

@@ -31,7 +31,7 @@ const paths = [
     num: "03",
     id: "aloha-cleaning",
     label: "Necesito limpieza",
-    name: "Aloha Cleaning",
+    name: "Carta de acomodación",
     tagline: "Servicio profesional",
     summary:
       "Limpieza profesional para pisos y habitaciones en Madrid. Cambios de inquilino, limpiezas periódicas o una sola vez. Baños, cocina, salón, ropa lavada y planchada.",

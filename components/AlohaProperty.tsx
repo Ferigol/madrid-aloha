@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import Link from "next/link";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const benefits = [
@@ -19,7 +18,7 @@ const benefits = [
   {
     num: "03",
     title: "Inquilinos en los que confiar",
-    desc: "Verificamos ingresos, referencias y documentación de cada candidato. Solo te presentamos perfiles solventes.",
+    desc: "Verificamos ingresos, referencias y documentación de cada candidato. Nuestro dto. de riesgos te ayudará a elegir el mejor perfil.",
   },
   {
     num: "04",
@@ -28,105 +27,225 @@ const benefits = [
   },
 ];
 
+const modalSections = [
+  {
+    title: "Encontramos tu inquilino",
+    items: [
+      "Buscamos al inquilino que mejor se adapte a tu vivienda según tus necesidades.",
+      "Nuestro departamento de riesgos verifica la solvencia de cada candidato.",
+      "Nuestro departamento legal redacta los contratos e incluye las cláusulas necesarias.",
+    ],
+  },
+  {
+    title: "Check In",
+    items: [
+      "Servicio de limpieza de la vivienda incluido antes de la entrada.",
+      "Gestionamos el Check In completo con el inquilino.",
+      "Cambiamos los datos bancarios y suministros a nombre de los nuevos inquilinos.",
+    ],
+  },
+  {
+    title: "Durante el alquiler",
+    items: [
+      "Atención telefónica directa y disponibilidad 24x7 para tus inquilinos.",
+      "Resolución de incidencias y averías: contactamos con el seguro o con técnicos profesionales cuando es necesario.",
+      "Presentamos mínimo 2 presupuestos para cualquier reparación antes de ejecutarla.",
+      "Gestión de partes y reparaciones con el seguro de la vivienda.",
+      "Coordinamos la sustitución de electrodomésticos o mobiliario con tu aprobación previa.",
+      "Gestionamos con la Comunidad de Propietarios los recibos de agua y cualquier incidencia.",
+    ],
+  },
+  {
+    title: "Check Out",
+    items: [
+      "Realizamos el Check Out y verificamos el estado del inmueble.",
+      "Gestionamos pagos pendientes, fianzas y gastos del inquilino saliente.",
+      "Coordinamos la limpieza integral entre el Check Out y el nuevo Check In.",
+      "Verificamos nuevamente la solvencia del inquilino entrante.",
+    ],
+  },
+];
+
 const ease = "easeOut" as const;
+
+function PropertyModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-ink/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Card */}
+      <motion.div
+        className="relative z-10 bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl"
+        initial={{ opacity: 0, y: 32, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.97 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+      >
+        {/* Header */}
+        <div className="sticky top-0 bg-white border-b border-ink/10 px-6 py-5 flex items-center justify-between z-10">
+          <h2 className="font-kondolar text-2xl font-black uppercase tracking-tight text-ink">
+            Detalles <span style={{ color: "#C8102E" }}>Aloha Property</span>
+          </h2>
+          <button
+            onClick={onClose}
+            aria-label="Cerrar"
+            className="w-8 h-8 flex items-center justify-center text-ink/50 hover:text-ink transition-colors text-xl leading-none"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="px-6 py-8 space-y-8">
+          {modalSections.map((section) => (
+            <div key={section.title}>
+              <h3
+                className="text-sm font-bold uppercase tracking-[0.15em] mb-3"
+                style={{ color: "#C8102E" }}
+              >
+                {section.title}
+              </h3>
+              <ul className="space-y-2">
+                {section.items.map((item, i) => (
+                  <li key={i} className="flex gap-3 text-sm text-ink/80 leading-relaxed">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#C8102E" }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function AlohaProperty() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section ref={ref} id="aloha-property" className="bg-primary text-cream min-h-screen flex flex-col justify-center">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-10 lg:py-16 xl:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+    <>
+      <section ref={ref} id="aloha-property" className="bg-primary text-cream min-h-screen flex flex-col justify-center">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-10 lg:py-16 xl:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-          {/* LEFT: content */}
-          <div>
-            <motion.p
-              className="text-[10px] uppercase tracking-[0.2em] text-ink font-medium mb-4"
-              initial={{ y: 60, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease }}
-            >
-              Quiero alquilar mi piso en Madrid
-            </motion.p>
-
-            <motion.h3
-              className="font-kondolar text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-4 lg:mb-6 xl:mb-8 text-ink"
-              initial={{ y: 60, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.45, ease }}
-            >
-              Aloha <span className="text-cream">Property</span>
-            </motion.h3>
-
-            <motion.p
-              className="text-base md:text-lg text-ink leading-relaxed mb-6 lg:mb-8 xl:mb-12 max-w-md"
-              initial={{ y: 60, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.6, ease }}
-            >
-              Alquilar no debería ser un segundo trabajo. Nosotros lo gestionamos todo para que tú solo disfrutes de la rentabilidad.
-            </motion.p>
-
-            <ol className="space-y-5 lg:space-y-6 xl:space-y-8 mb-6 lg:mb-8 xl:mb-12">
-              {benefits.map((b, i) => (
-                <motion.li
-                  key={b.num}
-                  className="grid grid-cols-[2.5rem_1fr] gap-4"
-                  initial={{ y: 60, opacity: 0 }}
-                  animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 + i * 0.15, ease }}
-                >
-                  <span className="font-kondolar text-xl font-black text-cream leading-none pt-0.5">
-                    {b.num}
-                  </span>
-                  <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wide text-ink mb-1.5">
-                      {b.title}
-                    </h4>
-                    <p className="text-base md:text-lg leading-relaxed text-ink">
-                      {b.desc}
-                    </p>
-                  </div>
-                </motion.li>
-              ))}
-            </ol>
-
-            <motion.div
-              initial={{ y: 60, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.6 + benefits.length * 0.15, ease }}
-            >
-              <Link
-                href="#contacto"
-                className="bg-ink text-cream inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
+            {/* LEFT: content */}
+            <div>
+              <motion.p
+                className="text-[10px] uppercase tracking-[0.2em] text-ink font-medium mb-4"
+                initial={{ y: 60, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
+                transition={{ duration: 0.7, delay: 0.3, ease }}
               >
-                Hablar con el equipo
-              </Link>
-            </motion.div>
-          </div>
+                Quiero alquilar mi piso en Madrid
+              </motion.p>
 
-          {/* RIGHT: image */}
-          <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-[min(860px,78vh)]" style={{ overflow: 'clip' }}>
-            <motion.div
-              className="absolute inset-0"
-              initial={{ y: 80, opacity: 0 }}
-              animate={isInView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
-              transition={{ duration: 0.8, ease }}
-            >
-              <Image
-                src="/image-aloha-property.jpg"
-                alt="Piso en alquiler en Madrid"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-cream/5" />
-            </motion.div>
-          </div>
+              <motion.h3
+                className="font-kondolar text-[43px] md:text-[55px] font-black uppercase tracking-tight leading-[0.9] mb-4 lg:mb-6 xl:mb-8 text-ink"
+                initial={{ y: 60, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
+                transition={{ duration: 0.7, delay: 0.45, ease }}
+              >
+                Aloha <span className="text-cream">Property</span>
+              </motion.h3>
 
+              <motion.p
+                className="text-base md:text-lg text-ink leading-relaxed mb-6 lg:mb-8 xl:mb-12 max-w-md"
+                initial={{ y: 60, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease }}
+              >
+                Alquilar no debería ser un segundo trabajo. Nosotros lo gestionamos todo para que tú solo disfrutes de la rentabilidad.
+              </motion.p>
+
+              <ol className="space-y-5 lg:space-y-6 xl:space-y-8 mb-6 lg:mb-8 xl:mb-12">
+                {benefits.map((b, i) => (
+                  <motion.li
+                    key={b.num}
+                    className="grid grid-cols-[2.5rem_1fr] gap-4"
+                    initial={{ y: 60, opacity: 0 }}
+                    animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 + i * 0.15, ease }}
+                  >
+                    <span className="font-kondolar text-xl font-black text-cream leading-none pt-0.5">
+                      {b.num}
+                    </span>
+                    <div>
+                      <h4 className="text-sm font-bold uppercase tracking-wide text-ink mb-1.5">
+                        {b.title}
+                      </h4>
+                      <p className="text-base md:text-lg leading-relaxed text-ink">
+                        {b.desc}
+                      </p>
+                    </div>
+                  </motion.li>
+                ))}
+              </ol>
+
+              <motion.div
+                initial={{ y: 60, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
+                transition={{ duration: 0.7, delay: 0.6 + benefits.length * 0.15, ease }}
+              >
+                <button
+                  onClick={() => setModalOpen(true)}
+                  className="bg-ink text-cream inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
+                >
+                  ¿Qué hacemos por tu piso?
+                </button>
+              </motion.div>
+            </div>
+
+            {/* RIGHT: image */}
+            <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-[min(860px,78vh)]" style={{ overflow: 'clip' }}>
+              <motion.div
+                className="absolute inset-0"
+                initial={{ y: 80, opacity: 0 }}
+                animate={isInView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
+                transition={{ duration: 0.8, ease }}
+              >
+                <Image
+                  src="/image-aloha-property.webp"
+                  alt="Piso en alquiler en Madrid"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-cream/5" />
+              </motion.div>
+            </div>
+
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <AnimatePresence>
+        {modalOpen && <PropertyModal onClose={() => setModalOpen(false)} />}
+      </AnimatePresence>
+    </>
   );
 }

@@ -18,18 +18,18 @@ const faqs = [
   },
   {
     q: "¿Necesito el NIE para firmar el contrato?",
-    a: "No es imprescindible para empezar. Te acompañamos en la gestión del NIE y otros trámites administrativos para que estés regularizado cuanto antes.",
+    a: "No es imprescindible para empezar, con tu pasaporte es suficiente. Te ayudamos con el trámite del NIE, número de cuenta, abono, empadronamiento y otros trámites administrativos para que estés regularizado cuanto antes.",
   },
   {
     q: "¿Recogéis en el aeropuerto aunque llegue fuera del horario habitual?",
-    a: "Sí. Nos adaptamos a tu vuelo. Solo necesitamos los datos de llegada con antelación para coordinar el servicio sin coste adicional.",
+    a: "Sí. Nos adaptamos a tu vuelo en horario laboral. Solo necesitamos los datos de llegada con antelación para coordinar el servicio sin coste adicional.",
   },
   {
     q: "¿En qué zonas de Madrid tenéis pisos?",
     a: "Trabajamos en toda la ciudad, con especial presencia en barrios universitarios y zonas bien comunicadas como Moncloa, Chamberí, Malasaña, Lavapiés y Salamanca.",
   },
   {
-    q: "¿Ayudáis con la cuenta bancaria y el transporte?",
+    q: "¿Ayudáis con el empadronamiento, cuenta bancaria y el abono de transporte?",
     a: "Sí. Te acompañamos en los trámites del día a día: apertura de cuenta bancaria, tarjeta de transporte y cualquier gestión que necesites al llegar.",
   },
   {
@@ -95,7 +95,7 @@ export default function FAQ() {
 
         <h3
           data-faq-title
-          className="font-kondolar text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-16 text-center text-ink"
+          className="font-kondolar text-[43px] md:text-[55px] font-black uppercase tracking-tight leading-[0.9] mb-16 text-center text-ink"
         >
           Preguntas <span className="text-primary">Frecuentes</span>
         </h3>

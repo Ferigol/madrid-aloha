@@ -71,12 +71,14 @@ export default function Hero() {
         {/* Video — scroll-scrubbed */}
         <video
           ref={videoRef}
-          src="/hero-madrid.mp4"
           className="absolute inset-0 w-full h-full object-cover object-center"
           muted
           playsInline
           preload="auto"
-        />
+        >
+          <source src="/hero-madrid.webm" type="video/webm" />
+          <source src="/hero-madrid.mp4"  type="video/mp4" />
+        </video>
 
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/45 to-ink/20" />
         <div className="absolute inset-0 bg-amber-950/20" />

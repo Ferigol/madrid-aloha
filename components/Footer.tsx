@@ -46,7 +46,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream">
+    <footer className="text-cream" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* Top grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 py-16 border-b border-cream/10">
@@ -60,22 +60,33 @@ export default function Footer() {
               className="h-[26px] w-auto mb-6"
               style={{ filter: "brightness(0) invert(1) sepia(0.08) brightness(0.87)" }}
             />
-            <p className="text-base md:text-lg text-cream/50 leading-relaxed max-w-xs">
+            <p className="text-sm text-white leading-relaxed max-w-xs">
               Ayudamos a estudiantes y trabajadores internacionales a encontrar su hogar en Madrid.
             </p>
+            <div className="flex items-center gap-5 mt-6">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-white hover:text-white/70 transition-colors"
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Nav */}
           <div className="md:col-span-2 md:col-start-6">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-cream/30 mb-5">
-              Navegación
-            </p>
             <ul className="space-y-3">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-xs text-cream/60 hover:text-cream transition-colors uppercase tracking-[0.1em]"
+                    className="text-sm text-white hover:text-white/70 transition-colors uppercase tracking-[0.1em]"
                   >
                     {l.label}
                   </Link>
@@ -86,36 +97,21 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="md:col-span-3 md:col-start-10">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-cream/30 mb-5">
-              Contacto
-            </p>
             <div className="space-y-3">
-              <p className="text-base md:text-lg text-cream/60">madrid@madridaloha.com</p>
-              <p className="text-base md:text-lg text-cream/60">+34 604 378 361</p>
-              <p className="text-base md:text-lg text-cream/60">Los Madroños 22, Madrid</p>
+<p className="text-sm text-white">+34 604 378 361</p>
+              <p className="text-sm text-white">Los Madroños 22, Madrid</p>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-cream/20">
+          <p className="text-[10px] uppercase tracking-[0.15em] text-white">
             © 2025 Madrid Aloha · Todos los derechos reservados
           </p>
-          <div className="flex items-center gap-5">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className="text-cream/30 hover:text-cream transition-colors"
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
+          <p className="text-[10px] tracking-[0.15em] text-white">
+            Proyecto creado por: host<span className="uppercase">IA</span>
+          </p>
         </div>
       </div>
     </footer>

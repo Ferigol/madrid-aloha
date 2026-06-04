@@ -8,8 +8,8 @@ import Image from "next/image";
 const benefits = [
   {
     num: "01",
-    title: "Tu piso listo desde el día 1",
-    desc: "Amueblado, reformado y en la zona que necesitas. Sin perder tiempo buscando ni llevarte sorpresas.",
+    title: "Tu piso desde el día uno",
+    desc: "Encontramos tu casa cerca de tu escuela o trabajo y en las zonas que quieras y con los requisitos que nos pidas, ajustándonos a tu presupuesto.",
   },
   {
     num: "02",
@@ -19,7 +19,7 @@ const benefits = [
   {
     num: "03",
     title: "Instalado en días, no semanas",
-    desc: "NIE, cuenta bancaria, transporte — te acompañamos con todos los trámites para que empieces cuanto antes.",
+    desc: "NIE, empadronamiento, cuenta bancaria, abono de transporte. Te ayudamos con todos los trámites para que empieces a disfrutar de esta experiencia cuanto antes.",
   },
   {
     num: "04",
@@ -51,7 +51,7 @@ export default function AlohaHome() {
             </motion.p>
 
             <motion.h3
-              className="font-kondolar text-5xl md:text-6xl font-black uppercase tracking-tight leading-[0.9] mb-4 lg:mb-6 xl:mb-8"
+              className="font-kondolar text-[43px] md:text-[55px] font-black uppercase tracking-tight leading-[0.9] mb-4 lg:mb-6 xl:mb-8"
               initial={{ y: 60, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.45, ease }}
@@ -115,7 +115,7 @@ export default function AlohaHome() {
               transition={{ duration: 0.8, ease }}
             >
               <Image
-                src="/image-aloha-home.jpg"
+                src="/image-aloha-home.webp"
                 alt="Piso en Madrid"
                 fill
                 className="object-cover object-center"
