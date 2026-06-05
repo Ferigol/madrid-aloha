@@ -73,7 +73,10 @@ export default function Footer() {
                   aria-label={s.label}
                   className="text-white hover:text-white/70 transition-colors"
                 >
-                  {s.icon}
+                  {/* Mobile: icono sin borde */}
+                  <span className="md:hidden">{s.icon}</span>
+                  {/* Desktop: texto en bold */}
+                  <span className="hidden md:inline text-[14px] font-bold uppercase tracking-wide">{s.label}</span>
                 </a>
               ))}
             </div>
@@ -86,7 +89,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-sm text-white hover:text-white/70 transition-colors uppercase tracking-[0.1em]"
+                    className="text-[12px] text-white hover:text-white/70 transition-colors uppercase tracking-[0.1em]"
                   >
                     {l.label}
                   </Link>
@@ -106,12 +109,12 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6">
-          <p className="text-[10px] uppercase tracking-[0.15em] text-white">
+          <p className="text-[10px] tracking-[0.15em] text-white">
             © 2025 Madrid Aloha · Todos los derechos reservados
           </p>
-          <p className="text-[10px] tracking-[0.15em] text-white">
+          <p className="text-[10px] tracking-[0.15em] text-white/70">
             Proyecto creado por:{" "}
-            <a href="https://hostia-agency.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors underline-offset-2 hover:underline">
+            <a href="https://hostia-agency.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 transition-colors">
               host<span className="uppercase">IA</span>
             </a>
           </p>

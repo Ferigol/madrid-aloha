@@ -125,7 +125,7 @@ const MemberRow = memo(function MemberRow({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="p-2 transition-colors duration-200"
+              className="p-2 rounded-full transition-colors duration-200"
               style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
               aria-label="LinkedIn"
             >
@@ -136,7 +136,7 @@ const MemberRow = memo(function MemberRow({
             <a
               href={`mailto:${member.social.email}`}
               onClick={(e) => e.stopPropagation()}
-              className="p-2 transition-colors duration-200"
+              className="p-2 rounded-full transition-colors duration-200"
               style={{ color: "var(--color-primary)", border: "1px solid var(--color-primary)" }}
               aria-label="Email"
             >

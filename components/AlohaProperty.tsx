@@ -103,14 +103,14 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-ink/10 px-6 py-5 flex items-center justify-between z-10">
-          <h2 className="font-kondolar text-2xl font-black uppercase tracking-tight text-ink">
+        <div className="sticky top-0 bg-white border-b border-ink/10 px-6 py-5 relative flex items-center justify-center z-10">
+          <h2 className="font-kondolar text-2xl font-black uppercase tracking-tight text-ink text-center">
             Detalles <span style={{ color: "#C8102E" }}>Aloha Property</span>
           </h2>
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="w-8 h-8 flex items-center justify-center text-ink/50 hover:text-ink transition-colors text-xl leading-none"
+            className="absolute right-4 w-8 h-8 flex items-center justify-center text-ink/50 hover:text-ink transition-colors text-xl leading-none"
           >
             ✕
           </button>

@@ -209,6 +209,7 @@ export default function Contact() {
     if (emailErr) e.email = emailErr;
     const phoneErr = validatePhone(f.phone, f.dialCode);
     if (phoneErr) { e.phone = phoneErr; if (!f.dialCode) e.dialCode = phoneErr; }
+    if (!f.type) e.type = "Selecciona una opción.";
     if (!f.message.trim()) e.message = "El mensaje es obligatorio.";
     return e;
   }
@@ -250,11 +251,11 @@ export default function Contact() {
             </p>
             <div className="flex items-center gap-4">
               <a href="https://wa.me/34604378361" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
-                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200">
+                className="p-3 rounded-full border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200">
                 <FaWhatsapp size={18} />
               </a>
               <a href="mailto:madrid@madridaloha.com" aria-label="Email"
-                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200">
+                className="p-3 rounded-full border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200">
                 <FaEnvelope size={18} />
               </a>
             </div>
@@ -306,19 +307,24 @@ export default function Contact() {
                       ? "border-red-300"
                       : "border-white/60 focus-within:border-white"
                   }`}>
-                    <select
-                      value={form.dialCode}
-                      onChange={(e) => setForm({ ...form, dialCode: e.target.value })}
-                      onBlur={() => { touch("dialCode"); handleBlur("phone"); }}
-                      className="bg-transparent text-base text-cream focus:outline-none appearance-none cursor-pointer shrink-0 max-w-[190px]"
-                    >
-                      <option value="" disabled className="text-ink bg-white">Prefijo</option>
-                      {countryCodes.map((c) => (
-                        <option key={c.name} value={c.dial} className="text-ink bg-white">
-                          {c.name} ({c.dial})
-                        </option>
-                      ))}
-                    </select>
+                    <div className="relative shrink-0 flex items-center">
+                      <select
+                        value={form.dialCode}
+                        onChange={(e) => setForm({ ...form, dialCode: e.target.value })}
+                        onBlur={() => { touch("dialCode"); handleBlur("phone"); }}
+                        className="bg-transparent text-base text-cream focus:outline-none appearance-none cursor-pointer pr-5 max-w-[190px]"
+                      >
+                        <option value="" disabled className="text-ink bg-white">Prefijo</option>
+                        {countryCodes.map((c) => (
+                          <option key={c.name} value={c.dial} className="text-ink bg-white">
+                            {c.name} ({c.dial})
+                          </option>
+                        ))}
+                      </select>
+                      <svg className="pointer-events-none absolute right-0 text-cream/60" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
                     <span className="text-cream/20 shrink-0">|</span>
                     <input
                       type="tel"
@@ -330,6 +336,25 @@ export default function Contact() {
                     />
                   </div>
                   <ErrorMsg msg={(touched.phone || touched.dialCode) ? errors.phone ?? errors.dialCode ?? "" : ""} />
+                </div>
+
+                {/* ¿Qué necesitas? */}
+                <div className="relative">
+                  <select
+                    value={form.type}
+                    onChange={(e) => setForm({ ...form, type: e.target.value })}
+                    onBlur={() => handleBlur("type")}
+                    className={`w-full bg-transparent border-b pb-3 text-base text-cream focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer pr-6 ${err("type")}`}
+                  >
+                    <option value="" disabled className="text-ink">¿Qué necesitas?</option>
+                    {options.map((o) => (
+                      <option key={o} value={o} className="text-ink">{o}</option>
+                    ))}
+                  </select>
+                  <svg className="pointer-events-none absolute right-0 bottom-4 text-cream/60" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <ErrorMsg msg={touched.type ? errors.type ?? "" : ""} />
                 </div>
 
                 {/* Mensaje */}
