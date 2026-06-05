@@ -129,13 +129,23 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
               <ul className="space-y-2">
                 {section.items.map((item, i) => (
                   <li key={i} className="flex gap-3 text-sm text-ink/80 leading-relaxed">
-                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#C8102E" }} />
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-ink" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
           ))}
+          <div className="px-6 pb-8 text-center">
+            <a
+              href="#contacto"
+              onClick={onClose}
+              className="inline-flex items-center justify-center px-10 py-4 text-xs uppercase tracking-[0.15em] font-medium text-cream transition-opacity duration-300 hover:opacity-80"
+              style={{ backgroundColor: "#C8102E" }}
+            >
+              Sí, quiero el servicio
+            </a>
+          </div>
         </div>
       </motion.div>
     </motion.div>

@@ -76,8 +76,7 @@ export default function Hero() {
           playsInline
           preload="auto"
         >
-          <source src="/hero-madrid.webm" type="video/webm" />
-          <source src="/hero-madrid.mp4"  type="video/mp4" />
+          <source src="/hero-madrid.mp4" type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/45 to-ink/20" />

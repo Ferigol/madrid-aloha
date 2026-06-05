@@ -8,23 +8,23 @@ import Image from "next/image";
 const benefits = [
   {
     num: "01",
-    title: "Listo antes de que llegue el siguiente",
-    desc: "El piso queda impecable entre contratos. Sin que tengas que mover un dedo.",
+    title: "Válida para cualquier consulado",
+    desc: "Emitida con todos los datos legales que exigen los consulados españoles para tramitar tu visado de estudiante.",
   },
   {
     num: "02",
-    title: "Periódica o puntual, tú decides",
-    desc: "Semanal, quincenal o una sola vez. Nos adaptamos a lo que necesitas.",
+    title: "La recibes en 24 horas",
+    desc: "En cuanto confirmas tu habitación o piso, te enviamos el documento por email listo para presentar.",
   },
   {
     num: "03",
-    title: "Lavandería incluida",
-    desc: "Ropa lavada, secada y doblada. Sin viajes a la lavandería.",
+    title: "Sin burocracia de tu parte",
+    desc: "Nosotros nos encargamos de toda la documentación. Tú solo la presentas.",
   },
   {
     num: "04",
-    title: "Un equipo de confianza",
-    desc: "Profesionales verificados que conocen cada rincón del piso como si fuera el suyo.",
+    title: "Tranquilidad antes de llegar",
+    desc: "Viaja a Madrid sabiendo que el trámite más importante ya está resuelto.",
   },
 ];
 
@@ -47,7 +47,7 @@ export default function AlohaCleaning() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease }}
             >
-              Para pisos y habitaciones en Madrid
+              Trámite esencial para tu visado
             </motion.p>
 
             <motion.h3
@@ -56,7 +56,7 @@ export default function AlohaCleaning() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.45, ease }}
             >
-              Carta de <span className="text-primary">acomodación</span>
+              Carta de<br /><span className="text-primary">acomodación</span>
             </motion.h3>
 
             <motion.p
@@ -65,7 +65,7 @@ export default function AlohaCleaning() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.6, ease }}
             >
-              Una limpieza profesional no debería ser un problema logístico. Nosotros lo organizamos todo para que el piso esté siempre en su mejor estado.
+              El consulado te la pide. Nosotros te la damos.<br />Recibes tu Carta de Acomodación oficial en cuanto firmas tu reserva. Sin esperas, sin complicaciones.
             </motion.p>
 
             <ol className="space-y-5 lg:space-y-6 xl:space-y-8 mb-6 lg:mb-8 xl:mb-12">
@@ -100,8 +100,14 @@ export default function AlohaCleaning() {
               <Link
                 href="#contacto"
                 className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('contacto');
+                  if (!el) return;
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
+                }}
               >
-                Solicitar presupuesto
+                Reserva y recibe tu carta
               </Link>
             </motion.div>
           </div>
@@ -115,8 +121,8 @@ export default function AlohaCleaning() {
               transition={{ duration: 0.8, ease }}
             >
               <Image
-                src="/hero-ma.webp"
-                alt="Limpieza profesional en Madrid"
+                src="/image-aloha-carta.webp"
+                alt="Carta de acomodación Madrid"
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"

@@ -100,6 +100,12 @@ export default function AlohaHome() {
               <Link
                 href="#contacto"
                 className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('contacto');
+                  if (!el) return;
+                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
+                }}
               >
                 Buscar mi piso ahora
               </Link>

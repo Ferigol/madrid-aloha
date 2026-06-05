@@ -9,25 +9,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
-    img: "https://i.pravatar.cc/150?img=47",
-    name: "Ana García",
-    role: "Estudiante de Máster · México",
+    img: "/testimonio-carlos.webp",
+    name: "Gabriel Ochoa Jara",
+    role: "Máster ADE · México",
     quote:
-      "Madrid Aloha me ayudó a encontrar habitación en menos de una semana cuando llegué de México para mi máster en el IE. Todo fue más fácil de lo que esperaba.",
+      "Excelente servicio de principio a fin. 100% recomendado. Rebeca es una excelente profesional y persona. El piso que alquilas es tal cual te lo muestra en fotos.",
   },
   {
-    img: "https://i.pravatar.cc/150?img=45",
-    name: "Carmen Ruiz",
-    role: "Propietaria · Madrid",
+    img: "/testimonio-clara.webp",
+    name: "Clara Tennyson",
+    role: "Posgrado de Economía · Chile",
     quote:
-      "Como propietaria, delegar la gestión de mi piso a Madrid Aloha fue la mejor decisión. Inquilinos serios, pagos puntuales y cero preocupaciones.",
+      "Recomiendo al 100% esta increíble empresa, me ayudó a encontrar el apartamento de mis sueños. Rebeca y Juan Carlos son unos cracks. Gracias chicos.",
   },
   {
     img: "https://i.pravatar.cc/150?img=11",
     name: "Martín Fernández",
-    role: "Estudiante de Posgrado · Argentina",
+    role: "Posgrado de Derecho · Argentina",
     quote:
-      "Llegué a Madrid por trabajo y en tres días ya tenía mi habitación firmada. El equipo es muy profesional y entiende perfectamente la situación de quien viene de fuera.",
+      "Llegué a Madrid un jueves y 3 días antes ya tenía mi habitación firmada. Rebeca es muy profesional y consiguió exactamente el espacio que quería.",
   },
 ];
 
@@ -97,7 +97,7 @@ export default function Testimonials() {
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((t) => (
-            <div key={t.name} data-card className="relative flex flex-col items-center pt-14">
+            <div key={t.name} data-card className="relative flex flex-col items-center pt-14 group">
 
               {/* Floating avatar */}
               <div data-avatar className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
@@ -105,12 +105,12 @@ export default function Testimonials() {
                 <img
                   src={t.img}
                   alt={t.name}
-                  className="w-24 h-24 rounded-full object-cover border-4 border-cream shadow-md"
+                  className="w-24 h-24 rounded-full object-cover border-4 border-cream shadow-md grayscale group-hover:grayscale-0 transition-[filter] duration-500"
                 />
               </div>
 
               {/* Card */}
-              <div className="w-full bg-cream border border-ink/10 pt-16 pb-8 px-8 text-center">
+              <div className="w-full bg-cream border border-ink/10 pt-16 pb-8 px-8 text-center transition-colors duration-300 group-hover:bg-white/15">
                 <Stars />
 
                 <p className="text-base leading-relaxed text-ink mb-8 font-light">

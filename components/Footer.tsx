@@ -4,7 +4,7 @@ import Link from "next/link";
 const navLinks = [
   { label: "Buscas Casa",  href: "#aloha-home" },
   { label: "Propietarios", href: "#aloha-property" },
-  { label: "Limpieza",     href: "#aloha-cleaning" },
+  { label: "Carta Consular", href: "#aloha-cleaning" },
   { label: "Equipo",        href: "#equipo" },
   { label: "FAQ",          href: "#faq" },
   { label: "Contacto",     href: "#contacto" },
@@ -98,7 +98,7 @@ export default function Footer() {
           {/* Contact */}
           <div className="md:col-span-3 md:col-start-10">
             <div className="space-y-3">
-<p className="text-sm text-white">+34 604 378 361</p>
+<a href="https://wa.me/34604378361" target="_blank" rel="noopener noreferrer" className="text-sm text-white hover:text-white/70 transition-colors">+34 604 378 361</a>
               <p className="text-sm text-white">Los Madroños 22, Madrid</p>
             </div>
           </div>
@@ -110,7 +110,10 @@ export default function Footer() {
             © 2025 Madrid Aloha · Todos los derechos reservados
           </p>
           <p className="text-[10px] tracking-[0.15em] text-white">
-            Proyecto creado por: host<span className="uppercase">IA</span>
+            Proyecto creado por:{" "}
+            <a href="https://hostia-agency.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors underline-offset-2 hover:underline">
+              host<span className="uppercase">IA</span>
+            </a>
           </p>
         </div>
       </div>

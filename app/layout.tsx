@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Madrid Aloha",
     images: [
       {
-        url: "/image-aloha-home.jpg",
+        url: "/image-aloha-home.webp",
         width: 1200,
         height: 800,
         alt: "Madrid Aloha — Tu hogar en Madrid",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Madrid Aloha — Tu hogar en Madrid",
     description:
       "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid.",
-    images: ["/image-aloha-home.jpg"],
+    images: ["/image-aloha-home.webp"],
   },
 };
 

@@ -7,7 +7,7 @@ import Link from "next/link";
 const links = [
   { label: "Buscas Casa", href: "#aloha-home" },
   { label: "Propietarios", href: "#aloha-property" },
-  { label: "Limpieza", href: "#aloha-cleaning" },
+  { label: "Carta Consular", href: "#aloha-cleaning" },
   { label: "Equipo", href: "#equipo" },
   { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },

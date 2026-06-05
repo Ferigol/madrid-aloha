@@ -11,123 +11,166 @@ gsap.registerPlugin(ScrollTrigger);
 const options = [
   "Busco habitación / piso",
   "Quiero gestionar mi propiedad",
-  "Servicio de limpieza",
+  "Carta de acomodación",
   "Otra consulta",
 ];
 
 const countryCodes = [
-  { name: "España", dial: "+34" },
-  { name: "Afganistán", dial: "+93" },
-  { name: "Albania", dial: "+355" },
-  { name: "Alemania", dial: "+49" },
-  { name: "Algeria", dial: "+213" },
-  { name: "Angola", dial: "+244" },
-  { name: "Arabia Saudí", dial: "+966" },
-  { name: "Argentina", dial: "+54" },
-  { name: "Armenia", dial: "+374" },
-  { name: "Australia", dial: "+61" },
-  { name: "Austria", dial: "+43" },
-  { name: "Azerbaiyán", dial: "+994" },
-  { name: "Bahréin", dial: "+973" },
-  { name: "Bangladesh", dial: "+880" },
-  { name: "Bélgica", dial: "+32" },
-  { name: "Bolivia", dial: "+591" },
-  { name: "Bosnia Herzegovina", dial: "+387" },
-  { name: "Brasil", dial: "+55" },
-  { name: "Bulgaria", dial: "+359" },
-  { name: "Camerún", dial: "+237" },
-  { name: "Canadá", dial: "+1" },
-  { name: "Chile", dial: "+56" },
-  { name: "China", dial: "+86" },
-  { name: "Colombia", dial: "+57" },
-  { name: "Corea del Sur", dial: "+82" },
-  { name: "Costa Rica", dial: "+506" },
-  { name: "Croacia", dial: "+385" },
-  { name: "Cuba", dial: "+53" },
-  { name: "Dinamarca", dial: "+45" },
-  { name: "Ecuador", dial: "+593" },
-  { name: "Egipto", dial: "+20" },
-  { name: "El Salvador", dial: "+503" },
-  { name: "Emiratos Árabes Unidos", dial: "+971" },
-  { name: "Eslovaquia", dial: "+421" },
-  { name: "Eslovenia", dial: "+386" },
-  { name: "Estados Unidos", dial: "+1" },
-  { name: "Estonia", dial: "+372" },
-  { name: "Etiopía", dial: "+251" },
-  { name: "Filipinas", dial: "+63" },
-  { name: "Finlandia", dial: "+358" },
-  { name: "Francia", dial: "+33" },
-  { name: "Georgia", dial: "+995" },
-  { name: "Ghana", dial: "+233" },
-  { name: "Grecia", dial: "+30" },
-  { name: "Guatemala", dial: "+502" },
-  { name: "Honduras", dial: "+504" },
-  { name: "Hong Kong", dial: "+852" },
-  { name: "Hungría", dial: "+36" },
-  { name: "India", dial: "+91" },
-  { name: "Indonesia", dial: "+62" },
-  { name: "Irak", dial: "+964" },
-  { name: "Irán", dial: "+98" },
-  { name: "Irlanda", dial: "+353" },
-  { name: "Israel", dial: "+972" },
-  { name: "Italia", dial: "+39" },
-  { name: "Jamaica", dial: "+1876" },
-  { name: "Japón", dial: "+81" },
-  { name: "Jordania", dial: "+962" },
-  { name: "Kazajistán", dial: "+7" },
-  { name: "Kenia", dial: "+254" },
-  { name: "Kuwait", dial: "+965" },
-  { name: "Letonia", dial: "+371" },
-  { name: "Líbano", dial: "+961" },
-  { name: "Libia", dial: "+218" },
-  { name: "Lituania", dial: "+370" },
-  { name: "Luxemburgo", dial: "+352" },
-  { name: "Malasia", dial: "+60" },
-  { name: "Marruecos", dial: "+212" },
-  { name: "México", dial: "+52" },
-  { name: "Moldova", dial: "+373" },
-  { name: "Mozambique", dial: "+258" },
-  { name: "Myanmar", dial: "+95" },
-  { name: "Nepal", dial: "+977" },
-  { name: "Nicaragua", dial: "+505" },
-  { name: "Nigeria", dial: "+234" },
-  { name: "Noruega", dial: "+47" },
-  { name: "Nueva Zelanda", dial: "+64" },
-  { name: "Países Bajos", dial: "+31" },
-  { name: "Pakistán", dial: "+92" },
-  { name: "Panamá", dial: "+507" },
-  { name: "Paraguay", dial: "+595" },
-  { name: "Perú", dial: "+51" },
-  { name: "Polonia", dial: "+48" },
-  { name: "Portugal", dial: "+351" },
-  { name: "Puerto Rico", dial: "+1787" },
-  { name: "Qatar", dial: "+974" },
-  { name: "Reino Unido", dial: "+44" },
-  { name: "República Checa", dial: "+420" },
-  { name: "República Dominicana", dial: "+1829" },
-  { name: "Rumanía", dial: "+40" },
-  { name: "Rusia", dial: "+7" },
-  { name: "Senegal", dial: "+221" },
-  { name: "Serbia", dial: "+381" },
-  { name: "Singapur", dial: "+65" },
-  { name: "Siria", dial: "+963" },
-  { name: "Sri Lanka", dial: "+94" },
-  { name: "Sudáfrica", dial: "+27" },
-  { name: "Sudán", dial: "+249" },
-  { name: "Suecia", dial: "+46" },
-  { name: "Suiza", dial: "+41" },
-  { name: "Tailandia", dial: "+66" },
-  { name: "Taiwán", dial: "+886" },
-  { name: "Tanzania", dial: "+255" },
-  { name: "Túnez", dial: "+216" },
-  { name: "Turquía", dial: "+90" },
-  { name: "Ucrania", dial: "+380" },
-  { name: "Uganda", dial: "+256" },
-  { name: "Uruguay", dial: "+598" },
-  { name: "Uzbekistán", dial: "+998" },
-  { name: "Venezuela", dial: "+58" },
-  { name: "Vietnam", dial: "+84" },
+  { name: "España",                    dial: "+34",   min: 9,  max: 9  },
+  { name: "Afganistán",               dial: "+93",   min: 9,  max: 9  },
+  { name: "Albania",                  dial: "+355",  min: 9,  max: 9  },
+  { name: "Alemania",                 dial: "+49",   min: 10, max: 11 },
+  { name: "Algeria",                  dial: "+213",  min: 9,  max: 9  },
+  { name: "Angola",                   dial: "+244",  min: 9,  max: 9  },
+  { name: "Arabia Saudí",             dial: "+966",  min: 9,  max: 9  },
+  { name: "Argentina",                dial: "+54",   min: 10, max: 10 },
+  { name: "Armenia",                  dial: "+374",  min: 8,  max: 8  },
+  { name: "Australia",                dial: "+61",   min: 9,  max: 9  },
+  { name: "Austria",                  dial: "+43",   min: 10, max: 11 },
+  { name: "Azerbaiyán",              dial: "+994",  min: 9,  max: 9  },
+  { name: "Bahréin",                 dial: "+973",  min: 8,  max: 8  },
+  { name: "Bangladesh",               dial: "+880",  min: 10, max: 10 },
+  { name: "Bélgica",                 dial: "+32",   min: 9,  max: 9  },
+  { name: "Bolivia",                  dial: "+591",  min: 8,  max: 8  },
+  { name: "Bosnia Herzegovina",       dial: "+387",  min: 8,  max: 8  },
+  { name: "Brasil",                   dial: "+55",   min: 10, max: 11 },
+  { name: "Bulgaria",                 dial: "+359",  min: 9,  max: 9  },
+  { name: "Camerún",                 dial: "+237",  min: 9,  max: 9  },
+  { name: "Canadá",                  dial: "+1",    min: 10, max: 10 },
+  { name: "Chile",                    dial: "+56",   min: 9,  max: 9  },
+  { name: "China",                    dial: "+86",   min: 11, max: 11 },
+  { name: "Colombia",                 dial: "+57",   min: 10, max: 10 },
+  { name: "Corea del Sur",            dial: "+82",   min: 9,  max: 10 },
+  { name: "Costa Rica",               dial: "+506",  min: 8,  max: 8  },
+  { name: "Croacia",                  dial: "+385",  min: 8,  max: 9  },
+  { name: "Cuba",                     dial: "+53",   min: 8,  max: 8  },
+  { name: "Dinamarca",               dial: "+45",   min: 8,  max: 8  },
+  { name: "Ecuador",                  dial: "+593",  min: 9,  max: 9  },
+  { name: "Egipto",                   dial: "+20",   min: 10, max: 10 },
+  { name: "El Salvador",              dial: "+503",  min: 8,  max: 8  },
+  { name: "Emiratos Árabes Unidos",  dial: "+971",  min: 9,  max: 9  },
+  { name: "Eslovaquia",              dial: "+421",  min: 9,  max: 9  },
+  { name: "Eslovenia",               dial: "+386",  min: 8,  max: 8  },
+  { name: "Estados Unidos",           dial: "+1",    min: 10, max: 10 },
+  { name: "Estonia",                  dial: "+372",  min: 7,  max: 8  },
+  { name: "Etiopía",                 dial: "+251",  min: 9,  max: 9  },
+  { name: "Filipinas",               dial: "+63",   min: 10, max: 10 },
+  { name: "Finlandia",               dial: "+358",  min: 9,  max: 10 },
+  { name: "Francia",                  dial: "+33",   min: 9,  max: 9  },
+  { name: "Georgia",                  dial: "+995",  min: 9,  max: 9  },
+  { name: "Ghana",                    dial: "+233",  min: 9,  max: 9  },
+  { name: "Grecia",                   dial: "+30",   min: 10, max: 10 },
+  { name: "Guatemala",                dial: "+502",  min: 8,  max: 8  },
+  { name: "Honduras",                 dial: "+504",  min: 8,  max: 8  },
+  { name: "Hong Kong",                dial: "+852",  min: 8,  max: 8  },
+  { name: "Hungría",                 dial: "+36",   min: 9,  max: 9  },
+  { name: "India",                    dial: "+91",   min: 10, max: 10 },
+  { name: "Indonesia",                dial: "+62",   min: 9,  max: 12 },
+  { name: "Irak",                     dial: "+964",  min: 10, max: 10 },
+  { name: "Irán",                    dial: "+98",   min: 10, max: 10 },
+  { name: "Irlanda",                  dial: "+353",  min: 9,  max: 9  },
+  { name: "Israel",                   dial: "+972",  min: 9,  max: 9  },
+  { name: "Italia",                   dial: "+39",   min: 9,  max: 10 },
+  { name: "Jamaica",                  dial: "+1876", min: 7,  max: 7  },
+  { name: "Japón",                   dial: "+81",   min: 10, max: 10 },
+  { name: "Jordania",                 dial: "+962",  min: 9,  max: 9  },
+  { name: "Kazajistán",             dial: "+7",    min: 10, max: 10 },
+  { name: "Kenia",                    dial: "+254",  min: 9,  max: 9  },
+  { name: "Kuwait",                   dial: "+965",  min: 8,  max: 8  },
+  { name: "Letonia",                  dial: "+371",  min: 8,  max: 8  },
+  { name: "Líbano",                  dial: "+961",  min: 7,  max: 8  },
+  { name: "Libia",                    dial: "+218",  min: 9,  max: 9  },
+  { name: "Lituania",                 dial: "+370",  min: 8,  max: 8  },
+  { name: "Luxemburgo",              dial: "+352",  min: 9,  max: 9  },
+  { name: "Malasia",                  dial: "+60",   min: 9,  max: 10 },
+  { name: "Marruecos",               dial: "+212",  min: 9,  max: 9  },
+  { name: "México",                  dial: "+52",   min: 10, max: 10 },
+  { name: "Moldova",                  dial: "+373",  min: 8,  max: 8  },
+  { name: "Mozambique",               dial: "+258",  min: 9,  max: 9  },
+  { name: "Myanmar",                  dial: "+95",   min: 8,  max: 10 },
+  { name: "Nepal",                    dial: "+977",  min: 10, max: 10 },
+  { name: "Nicaragua",                dial: "+505",  min: 8,  max: 8  },
+  { name: "Nigeria",                  dial: "+234",  min: 10, max: 10 },
+  { name: "Noruega",                 dial: "+47",   min: 8,  max: 8  },
+  { name: "Nueva Zelanda",            dial: "+64",   min: 8,  max: 9  },
+  { name: "Países Bajos",           dial: "+31",   min: 9,  max: 9  },
+  { name: "Pakistán",               dial: "+92",   min: 10, max: 10 },
+  { name: "Panamá",                 dial: "+507",  min: 8,  max: 8  },
+  { name: "Paraguay",                 dial: "+595",  min: 9,  max: 9  },
+  { name: "Perú",                    dial: "+51",   min: 9,  max: 9  },
+  { name: "Polonia",                  dial: "+48",   min: 9,  max: 9  },
+  { name: "Portugal",                 dial: "+351",  min: 9,  max: 9  },
+  { name: "Puerto Rico",              dial: "+1787", min: 7,  max: 7  },
+  { name: "Qatar",                    dial: "+974",  min: 8,  max: 8  },
+  { name: "Reino Unido",              dial: "+44",   min: 10, max: 10 },
+  { name: "República Checa",         dial: "+420",  min: 9,  max: 9  },
+  { name: "República Dominicana",    dial: "+1829", min: 7,  max: 7  },
+  { name: "Rumanía",                dial: "+40",   min: 9,  max: 9  },
+  { name: "Rusia",                    dial: "+7",    min: 10, max: 10 },
+  { name: "Senegal",                  dial: "+221",  min: 9,  max: 9  },
+  { name: "Serbia",                   dial: "+381",  min: 8,  max: 9  },
+  { name: "Singapur",                dial: "+65",   min: 8,  max: 8  },
+  { name: "Siria",                    dial: "+963",  min: 9,  max: 9  },
+  { name: "Sri Lanka",                dial: "+94",   min: 9,  max: 9  },
+  { name: "Sudáfrica",              dial: "+27",   min: 9,  max: 9  },
+  { name: "Sudán",                   dial: "+249",  min: 9,  max: 9  },
+  { name: "Suecia",                   dial: "+46",   min: 7,  max: 9  },
+  { name: "Suiza",                    dial: "+41",   min: 9,  max: 9  },
+  { name: "Tailandia",               dial: "+66",   min: 9,  max: 9  },
+  { name: "Taiwán",                  dial: "+886",  min: 9,  max: 9  },
+  { name: "Tanzania",                 dial: "+255",  min: 9,  max: 9  },
+  { name: "Túnez",                   dial: "+216",  min: 8,  max: 8  },
+  { name: "Turquía",                 dial: "+90",   min: 10, max: 10 },
+  { name: "Ucrania",                  dial: "+380",  min: 9,  max: 9  },
+  { name: "Uganda",                   dial: "+256",  min: 9,  max: 9  },
+  { name: "Uruguay",                  dial: "+598",  min: 8,  max: 8  },
+  { name: "Uzbekistán",             dial: "+998",  min: 9,  max: 9  },
+  { name: "Venezuela",                dial: "+58",   min: 10, max: 10 },
+  { name: "Vietnam",                  dial: "+84",   min: 9,  max: 10 },
 ];
+
+type FormFields = {
+  name: string;
+  email: string;
+  dialCode: string;
+  phone: string;
+  type: string;
+  message: string;
+};
+
+type FormErrors = Partial<Record<keyof FormFields, string>>;
+
+function validateEmail(email: string): string {
+  if (!email) return "El correo es obligatorio.";
+  if (!email.includes("@")) return 'El correo debe contener "@".';
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(email)) return "Introduce un correo válido (ej: nombre@dominio.com).";
+  return "";
+}
+
+function validatePhone(phone: string, dialCode: string): string {
+  if (!dialCode) return "Selecciona un prefijo de país.";
+  if (!phone) return "El número de móvil es obligatorio.";
+  const digits = phone.replace(/\D/g, "");
+  const country = countryCodes.find((c) => c.dial === dialCode);
+  if (!country) return "";
+  if (digits.length < country.min || digits.length > country.max) {
+    const range = country.min === country.max
+      ? `${country.min} dígitos`
+      : `${country.min}–${country.max} dígitos`;
+    return `${country.name} requiere ${range} (has introducido ${digits.length}).`;
+  }
+  return "";
+}
+
+function ErrorMsg({ msg }: { msg: string }) {
+  if (!msg) return null;
+  return (
+    <p className="mt-1.5 text-[11px] tracking-wide text-red-300 flex items-center gap-1">
+      <span>⚠</span> {msg}
+    </p>
+  );
+}
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -136,143 +179,140 @@ export default function Contact() {
 
   useGSAP(() => {
     if (!sectionRef.current || !formRef.current) return;
-
     gsap.fromTo(
       formRef.current,
       { x: 120, opacity: 0 },
       {
-        x: 0,
-        opacity: 1,
-        ease: "power2.out",
+        x: 0, opacity: 1, ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
-          end: "top 25%",
-          scrub: 1,
+          start: "top 80%", end: "top 25%", scrub: 1,
         },
       },
     );
   }, { scope: sectionRef });
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    dialCode: "",
-    phone: "",
-    type: "",
-    message: "",
-  });
-  const [emailError, setEmailError] = useState("");
 
-  function validateEmail(value: string) {
-    if (value && !value.includes("@")) {
-      setEmailError('El email debe contener "@"');
-    } else {
-      setEmailError("");
-    }
+  const [form, setForm] = useState<FormFields>({
+    name: "", email: "", dialCode: "", phone: "", type: "", message: "",
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
+
+  function touch(field: keyof FormFields) {
+    setTouched((t) => ({ ...t, [field]: true }));
   }
 
-  function handleSubmit(e: { preventDefault(): void }) {
+  function getErrors(f: FormFields): FormErrors {
+    const e: FormErrors = {};
+    if (!f.name.trim()) e.name = "El nombre es obligatorio.";
+    const emailErr = validateEmail(f.email);
+    if (emailErr) e.email = emailErr;
+    const phoneErr = validatePhone(f.phone, f.dialCode);
+    if (phoneErr) { e.phone = phoneErr; if (!f.dialCode) e.dialCode = phoneErr; }
+    if (!f.message.trim()) e.message = "El mensaje es obligatorio.";
+    return e;
+  }
+
+  function handleBlur(field: keyof FormFields) {
+    touch(field);
+    setErrors(getErrors(form));
+  }
+
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.email.includes("@")) {
-      setEmailError('El email debe contener "@"');
-      return;
-    }
+    const allTouched = Object.fromEntries(
+      (Object.keys(form) as (keyof FormFields)[]).map((k) => [k, true])
+    ) as Record<keyof FormFields, boolean>;
+    setTouched(allTouched);
+    const errs = getErrors(form);
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
     setSent(true);
   }
+
+  const inputBase =
+    "w-full bg-transparent border-b pb-3 text-base text-cream placeholder:text-white/60 focus:outline-none transition-colors";
+  const err = (f: keyof FormFields) =>
+    touched[f] && errors[f] ? "border-red-300 focus:border-red-300" : "border-white/60 focus:border-white";
 
   return (
     <section id="contacto" className="bg-primary text-cream" style={{ overflowX: "clip" }}>
       <div ref={sectionRef} className="max-w-[1400px] mx-auto px-6 md:px-12 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          {/* Left: Info */}
+
+          {/* Left */}
           <div className="lg:col-span-4">
             <h3 className="font-kondolar text-4xl md:text-5xl font-black uppercase tracking-tight leading-[0.95] mb-8">
               ¿Tu casa en Madrid?
             </h3>
-            <p className="text-base md:text-lg text-cream leading-relaxed max-w-xs mb-8">
+            <p className="text-base text-cream leading-relaxed max-w-xs mb-8">
               Cuéntanos qué necesitas y te respondemos en menos de 24 horas.
             </p>
-
             <div className="flex items-center gap-4">
-              <a
-                href="https://wa.me/34604378361"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200"
-              >
+              <a href="https://wa.me/34604378361" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200">
                 <FaWhatsapp size={18} />
               </a>
-              <a
-                href="mailto:madrid@madridaloha.com"
-                aria-label="Email"
-                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200"
-              >
+              <a href="mailto:madrid@madridaloha.com" aria-label="Email"
+                className="p-3 border border-cream/30 text-cream/70 hover:text-cream hover:border-cream transition-colors duration-200">
                 <FaEnvelope size={18} />
               </a>
             </div>
           </div>
 
-          {/* Right: Form */}
+          {/* Right */}
           <div ref={formRef} className="lg:col-span-8">
             {sent ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
                 <span className="text-6xl font-black text-cream/20 mb-4">✓</span>
-                <h4 className="font-kondolar text-2xl font-black uppercase tracking-tight mb-3">
-                  Mensaje enviado
-                </h4>
-                <p className="text-base md:text-lg text-cream/60">
-                  Te responderemos en menos de 24 horas. ¡Gracias!
+                <h4 className="font-kondolar text-2xl font-black uppercase tracking-tight mb-3">Mensaje enviado</h4>
+                <p className="text-base text-white">
+                  Te responderemos en menos de 24 horas.<br />¡Gracias!
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} noValidate className="space-y-6">
+
+                {/* Nombre + Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Nombre */}
                   <div>
                     <input
-                      required
                       type="text"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none focus:border-cream transition-colors"
-                      placeholder="Tu nombre"
+                      onBlur={() => handleBlur("name")}
+                      className={`${inputBase} ${err("name")}`}
+                      placeholder="Nombre"
                     />
+                    <ErrorMsg msg={touched.name ? errors.name ?? "" : ""} />
                   </div>
-
-                  {/* Email */}
                   <div>
                     <input
-                      required
                       type="text"
                       value={form.email}
-                      onChange={(e) => {
-                        setForm({ ...form, email: e.target.value });
-                        validateEmail(e.target.value);
-                      }}
-                      onBlur={() => validateEmail(form.email)}
-                      className={`w-full bg-transparent border-b pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none transition-colors ${
-                        emailError ? "border-red-300 focus:border-red-300" : "border-cream/30 focus:border-cream"
-                      }`}
-                      placeholder="Tu correo"
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      onBlur={() => handleBlur("email")}
+                      className={`${inputBase} ${err("email")}`}
+                      placeholder="Correo electrónico"
                     />
-                    {emailError && (
-                      <p className="mt-2 text-[10px] uppercase tracking-[0.15em] text-red-300">
-                        {emailError}
-                      </p>
-                    )}
+                    <ErrorMsg msg={touched.email ? errors.email ?? "" : ""} />
                   </div>
                 </div>
 
-                {/* Teléfono */}
+                {/* Prefijo + Móvil */}
                 <div>
-                  <div className="flex items-end gap-3 border-b border-cream/30 pb-3 focus-within:border-cream transition-colors">
+                  <div className={`flex items-end gap-3 border-b pb-3 transition-colors ${
+                    (touched.phone || touched.dialCode) && (errors.phone || errors.dialCode)
+                      ? "border-red-300"
+                      : "border-white/60 focus-within:border-white"
+                  }`}>
                     <select
                       value={form.dialCode}
                       onChange={(e) => setForm({ ...form, dialCode: e.target.value })}
-                      className="bg-transparent text-base md:text-lg text-cream focus:outline-none appearance-none cursor-pointer shrink-0 max-w-[180px]"
+                      onBlur={() => { touch("dialCode"); handleBlur("phone"); }}
+                      className="bg-transparent text-base text-cream focus:outline-none appearance-none cursor-pointer shrink-0 max-w-[190px]"
                     >
-                      <option value="" disabled className="text-ink bg-white">Prefijo país</option>
+                      <option value="" disabled className="text-ink bg-white">Prefijo</option>
                       {countryCodes.map((c) => (
                         <option key={c.name} value={c.dial} className="text-ink bg-white">
                           {c.name} ({c.dial})
@@ -284,41 +324,25 @@ export default function Contact() {
                       type="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="flex-1 bg-transparent text-base md:text-lg text-cream placeholder:text-cream focus:outline-none min-w-0"
-                      placeholder="Tu móvil"
+                      onBlur={() => handleBlur("phone")}
+                      className="flex-1 bg-transparent text-base text-cream placeholder:text-white/60 focus:outline-none min-w-0"
+                      placeholder="Número de móvil"
                     />
                   </div>
-                </div>
-
-                {/* ¿Qué necesitas? */}
-                <div>
-                  <select
-                    required
-                    value={form.type}
-                    onChange={(e) => setForm({ ...form, type: e.target.value })}
-                    className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream focus:outline-none focus:border-cream transition-colors appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled className="text-ink">
-                      ¿Qué necesitas?
-                    </option>
-                    {options.map((o) => (
-                      <option key={o} value={o} className="text-ink">
-                        {o}
-                      </option>
-                    ))}
-                  </select>
+                  <ErrorMsg msg={(touched.phone || touched.dialCode) ? errors.phone ?? errors.dialCode ?? "" : ""} />
                 </div>
 
                 {/* Mensaje */}
                 <div>
                   <textarea
-                    required
                     rows={4}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full bg-transparent border-b border-cream/30 pb-3 text-base md:text-lg text-cream placeholder:text-cream focus:outline-none focus:border-cream transition-colors resize-none"
+                    onBlur={() => handleBlur("message")}
+                    className={`${inputBase} resize-none ${err("message")}`}
                     placeholder="Tu mensaje aquí..."
                   />
+                  <ErrorMsg msg={touched.message ? errors.message ?? "" : ""} />
                 </div>
 
                 <div className="pt-4 flex justify-end">
@@ -330,9 +354,11 @@ export default function Contact() {
                     <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </button>
                 </div>
+
               </form>
             )}
           </div>
+
         </div>
       </div>
     </section>
