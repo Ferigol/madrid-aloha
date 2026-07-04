@@ -74,6 +74,7 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover object-center"
           muted
           playsInline
+          autoPlay
           preload="auto"
         >
           <source src="/hero-madrid.mp4" type="video/mp4" />
