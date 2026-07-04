@@ -248,7 +248,7 @@ export default function AlohaProperty() {
               >
                 <button
                   onClick={() => setModalOpen(true)}
-                  className="bg-ink text-cream inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
+                  className="bg-ink text-cream inline-flex items-center justify-center px-8 py-[18px] md:py-4 text-sm md:text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
                 >
                   ¿Qué hacemos por tu piso?
                 </button>

@@ -100,7 +100,7 @@ export default function AlohaCleaning() {
             >
               <Link
                 href="#contacto"
-                className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
+                className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-[18px] md:py-4 text-sm md:text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
                 onClick={(e) => {
                   e.preventDefault();
                   const el = document.getElementById('contacto');
