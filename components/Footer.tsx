@@ -93,8 +93,7 @@ export default function Footer() {
                   aria-label={s.label}
                   className="text-white hover:text-white/70 transition-colors"
                 >
-                  <span className="md:hidden">{s.icon}</span>
-                  <span className="hidden md:inline text-[14px] font-bold uppercase tracking-wide">{s.label}</span>
+                  <span className="text-[14px] font-bold uppercase tracking-wide">{s.label}</span>
                 </a>
               ))}
             </div>
