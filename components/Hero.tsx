@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useLang } from "@/context/LanguageContext";
 
 const VIDEO_DURATION = 5;
 const FADE_START = 0.35;  // title 1 starts fading at second 1.75
@@ -9,6 +10,7 @@ const FADE_END   = 0.40;  // title 1 fully gone at second 2
 const SWITCH_AT  = 0.60;  // title 2 appears at second 3
 
 export default function Hero() {
+  const { tr } = useLang();
   const sectionRef  = useRef<HTMLDivElement>(null);
   const videoRef    = useRef<HTMLVideoElement>(null);
   const title1Ref   = useRef<HTMLDivElement>(null);
@@ -93,8 +95,8 @@ export default function Hero() {
               ref={title1Ref}
               className="font-kondolar text-[clamp(3rem,8vw,7.5rem)] font-black leading-[0.92] tracking-tight text-cream text-center"
             >
-              <span className="block">¿Vienes a vivir</span>
-              <span className="block">a Madrid?</span>
+              <span className="block">{tr.hero.title1a}</span>
+              <span className="block">{tr.hero.title1b}</span>
             </h1>
 
             {/* Title 2 — absolute overlay, line-reveal animation re-triggers on each activation */}
@@ -102,10 +104,10 @@ export default function Hero() {
               <div key={title2Key} className="absolute inset-0 flex items-center justify-center">
                 <h1 className="font-kondolar text-[clamp(3rem,8vw,7.5rem)] font-black leading-[0.92] tracking-tight text-cream text-center">
                   <span className="block overflow-hidden">
-                    <span className="block whitespace-nowrap animate-line-reveal-1">Tenemos la casa</span>
+                    <span className="block whitespace-nowrap animate-line-reveal-1">{tr.hero.title2a}</span>
                   </span>
                   <span className="block overflow-hidden">
-                    <span className="block whitespace-nowrap animate-line-reveal-2">que buscas</span>
+                    <span className="block whitespace-nowrap animate-line-reveal-2">{tr.hero.title2b}</span>
                   </span>
                 </h1>
               </div>
@@ -117,13 +119,13 @@ export default function Hero() {
               href="#contacto"
               className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] w-52 whitespace-nowrap inline-flex items-center justify-center text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium opacity-80 transition-opacity duration-300 hover:opacity-50"
             >
-              Busco casa
+              {tr.hero.cta1}
             </Link>
             <Link
               href="#aloha-property"
               className="w-52 whitespace-nowrap inline-flex items-center justify-center border border-cream text-cream px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-all duration-300 hover:bg-cream hover:text-ink hover:opacity-50"
             >
-              Alquilo piso
+              {tr.hero.cta2}
             </Link>
           </div>
 

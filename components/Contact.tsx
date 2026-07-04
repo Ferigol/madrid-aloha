@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
+import { useLang } from "@/context/LanguageContext";
 
 function ChevronDown({ className = "" }: { className?: string }) {
   return (
@@ -13,13 +14,6 @@ function ChevronDown({ className = "" }: { className?: string }) {
 
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-
-const options = [
-  "Busco habitación / piso",
-  "Quiero gestionar mi propiedad",
-  "Carta de acomodación",
-  "Otra consulta",
-];
 
 const countryCodes = [
   { name: "España",                    dial: "+34",   min: 9,  max: 9  },
@@ -146,27 +140,17 @@ type FormFields = {
 
 type FormErrors = Partial<Record<keyof FormFields, string>>;
 
-function validateEmail(email: string): string {
-  if (!email) return "El correo es obligatorio.";
-  if (!email.includes("@")) return 'El correo debe contener "@".';
+function isValidEmail(email: string): boolean {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!re.test(email)) return "Introduce un correo válido (ej: nombre@dominio.com).";
-  return "";
+  return !!email && re.test(email);
 }
 
-function validatePhone(phone: string, dialCode: string): string {
-  if (!dialCode) return "Selecciona un prefijo de país.";
-  if (!phone) return "El número de móvil es obligatorio.";
+function isValidPhone(phone: string, dialCode: string): boolean {
+  if (!phone) return false;
   const digits = phone.replace(/\D/g, "");
   const country = countryCodes.find((c) => c.dial === dialCode);
-  if (!country) return "";
-  if (digits.length < country.min || digits.length > country.max) {
-    const range = country.min === country.max
-      ? `${country.min} dígitos`
-      : `${country.min}–${country.max} dígitos`;
-    return `${country.name} requiere ${range} (has introducido ${digits.length}).`;
-  }
-  return "";
+  if (!country) return digits.length >= 7;
+  return digits.length >= country.min && digits.length <= country.max;
 }
 
 function ErrorMsg({ msg }: { msg: string }) {
@@ -179,6 +163,7 @@ function ErrorMsg({ msg }: { msg: string }) {
 }
 
 export default function Contact() {
+  const { tr } = useLang();
   const [sent, setSent] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef    = useRef<HTMLDivElement>(null);
@@ -209,14 +194,14 @@ export default function Contact() {
   }
 
   function getErrors(f: FormFields): FormErrors {
+    const msgs = tr.contact.errors;
     const e: FormErrors = {};
-    if (!f.name.trim()) e.name = "El nombre es obligatorio.";
-    const emailErr = validateEmail(f.email);
-    if (emailErr) e.email = emailErr;
-    const phoneErr = validatePhone(f.phone, f.dialCode);
-    if (phoneErr) { e.phone = phoneErr; if (!f.dialCode) e.dialCode = phoneErr; }
-    if (!f.type) e.type = "Selecciona una opción.";
-    if (!f.message.trim()) e.message = "El mensaje es obligatorio.";
+    if (!f.name.trim()) e.name = msgs.name;
+    if (!isValidEmail(f.email)) e.email = msgs.email;
+    if (!f.dialCode) e.dialCode = msgs.dialCode;
+    else if (!isValidPhone(f.phone, f.dialCode)) e.phone = msgs.phone;
+    if (!f.type) e.type = msgs.type;
+    if (!f.message.trim()) e.message = msgs.message;
     return e;
   }
 
@@ -250,10 +235,10 @@ export default function Contact() {
           {/* Left */}
           <div className="lg:col-span-4">
             <h3 className="font-kondolar text-4xl md:text-5xl font-black uppercase tracking-tight leading-[0.95] mb-8">
-              ¿Tu casa en Madrid?
+              {tr.contact.title1}
             </h3>
             <p className="text-base text-cream leading-relaxed max-w-xs mb-8">
-              Cuéntanos qué necesitas y te respondemos en menos de 24 horas.
+              {tr.contact.intro}
             </p>
             <div className="flex items-center gap-4">
               <a href="https://wa.me/34604378361" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
@@ -272,9 +257,9 @@ export default function Contact() {
             {sent ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
                 <span className="text-6xl font-black text-cream/20 mb-4">✓</span>
-                <h4 className="font-kondolar text-2xl font-black uppercase tracking-tight mb-3">Mensaje enviado</h4>
-                <p className="text-base text-white">
-                  Te responderemos en menos de 24 horas.<br />¡Gracias!
+                <h4 className="font-kondolar text-2xl font-black uppercase tracking-tight mb-3">{tr.contact.sent}</h4>
+                <p className="text-base text-white whitespace-pre-line">
+                  {tr.contact.success}
                 </p>
               </div>
             ) : (
@@ -289,7 +274,7 @@ export default function Contact() {
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       onBlur={() => handleBlur("name")}
                       className={`${inputBase} ${err("name")}`}
-                      placeholder="Nombre"
+                      placeholder={tr.contact.placeholders.name}
                     />
                     <ErrorMsg msg={touched.name ? errors.name ?? "" : ""} />
                   </div>
@@ -300,7 +285,7 @@ export default function Contact() {
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       onBlur={() => handleBlur("email")}
                       className={`${inputBase} ${err("email")}`}
-                      placeholder="Correo electrónico"
+                      placeholder={tr.contact.placeholders.email}
                     />
                     <ErrorMsg msg={touched.email ? errors.email ?? "" : ""} />
                   </div>
@@ -320,7 +305,7 @@ export default function Contact() {
                         onBlur={() => { touch("dialCode"); handleBlur("phone"); }}
                         className="bg-transparent text-base text-cream focus:outline-none appearance-none cursor-pointer pr-5 max-w-[190px]"
                       >
-                        <option value="" disabled className="text-ink bg-white">Prefijo</option>
+                        <option value="" disabled className="text-ink bg-white">{tr.contact.placeholders.prefix}</option>
                         {countryCodes.map((c) => (
                           <option key={c.name} value={c.dial} className="text-ink bg-white">
                             {c.name} ({c.dial})
@@ -336,7 +321,7 @@ export default function Contact() {
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       onBlur={() => handleBlur("phone")}
                       className="flex-1 bg-transparent text-base text-cream placeholder:text-white/60 focus:outline-none min-w-0"
-                      placeholder="Número de móvil"
+                      placeholder={tr.contact.placeholders.phone}
                     />
                   </div>
                   <ErrorMsg msg={(touched.phone || touched.dialCode) ? errors.phone ?? errors.dialCode ?? "" : ""} />
@@ -350,8 +335,8 @@ export default function Contact() {
                     onBlur={() => handleBlur("type")}
                     className={`w-full bg-transparent border-b pb-3 text-base text-cream focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer pr-6 ${err("type")}`}
                   >
-                    <option value="" disabled className="text-ink">¿Qué necesitas?</option>
-                    {options.map((o) => (
+                    <option value="" disabled className="text-ink">{tr.contact.typeLabel}</option>
+                    {tr.contact.typeOptions.map((o) => (
                       <option key={o} value={o} className="text-ink">{o}</option>
                     ))}
                   </select>
@@ -367,7 +352,7 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     onBlur={() => handleBlur("message")}
                     className={`${inputBase} resize-none ${err("message")}`}
-                    placeholder="Tu mensaje aquí..."
+                    placeholder={tr.contact.placeholders.message}
                   />
                   <ErrorMsg msg={touched.message ? errors.message ?? "" : ""} />
                 </div>
@@ -377,7 +362,7 @@ export default function Contact() {
                     type="submit"
                     className="bg-ink text-cream inline-flex items-center gap-3 px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80 group"
                   >
-                    Enviar mensaje
+                    {tr.contact.send}
                     <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </button>
                 </div>

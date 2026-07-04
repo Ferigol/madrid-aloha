@@ -4,72 +4,15 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { scrollToSection } from "@/lib/scrollToSection";
+import { useLang } from "@/context/LanguageContext";
+import type { Lang } from "@/lib/translations";
+import t from "@/lib/translations";
 
-const benefits = [
-  {
-    num: "01",
-    title: "Cobras sin preocuparte por nada",
-    desc: "Seleccionamos al inquilino, firmamos el contrato y gestionamos cualquier incidencia. Tú solo ves el ingreso en tu cuenta.",
-  },
-  {
-    num: "02",
-    title: "Nunca recibes una llamada",
-    desc: "Todas las comunicaciones con el inquilino pasan por nosotros. Tu tranquilidad está garantizada.",
-  },
-  {
-    num: "03",
-    title: "Inquilinos en los que confiar",
-    desc: "Verificamos ingresos, referencias y documentación de cada candidato. Nuestro dto. de riesgos te ayudará a elegir el mejor perfil.",
-  },
-  {
-    num: "04",
-    title: "El piso, siempre en perfectas condiciones",
-    desc: "Limpieza gratuita al finalizar cada contrato y gestión de mantenimiento incluida.",
-  },
-];
-
-const modalSections = [
-  {
-    title: "Encontramos tu inquilino",
-    items: [
-      "Buscamos al inquilino que mejor se adapte a tu vivienda según tus necesidades.",
-      "Nuestro departamento de riesgos verifica la solvencia de cada candidato.",
-      "Nuestro departamento legal redacta los contratos e incluye las cláusulas necesarias.",
-    ],
-  },
-  {
-    title: "Check In",
-    items: [
-      "Servicio de limpieza de la vivienda incluido antes de la entrada.",
-      "Gestionamos el Check In completo con el inquilino.",
-      "Cambiamos los datos bancarios y suministros a nombre de los nuevos inquilinos.",
-    ],
-  },
-  {
-    title: "Durante el alquiler",
-    items: [
-      "Atención telefónica directa y disponibilidad 24x7 para tus inquilinos.",
-      "Resolución de incidencias y averías: contactamos con el seguro o con técnicos profesionales cuando es necesario.",
-      "Presentamos mínimo 2 presupuestos para cualquier reparación antes de ejecutarla.",
-      "Gestión de partes y reparaciones con el seguro de la vivienda.",
-      "Coordinamos la sustitución de electrodomésticos o mobiliario con tu aprobación previa.",
-      "Gestionamos con la Comunidad de Propietarios los recibos de agua y cualquier incidencia.",
-    ],
-  },
-  {
-    title: "Check Out",
-    items: [
-      "Realizamos el Check Out y verificamos el estado del inmueble.",
-      "Gestionamos pagos pendientes, fianzas y gastos del inquilino saliente.",
-      "Coordinamos la limpieza integral entre el Check Out y el nuevo Check In.",
-      "Verificamos nuevamente la solvencia del inquilino entrante.",
-    ],
-  },
-];
-
+const nums = ["01", "02", "03", "04"];
 const ease = "easeOut" as const;
 
-function PropertyModal({ onClose }: { onClose: () => void }) {
+function PropertyModal({ onClose, lang }: { onClose: () => void; lang: Lang }) {
+  const modal = t[lang].property.modal;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -127,9 +70,8 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
         {/* Header — siempre visible */}
         <div className="flex-shrink-0 bg-white border-b border-ink/10 px-6 py-5 relative flex items-center justify-center">
           <h2 className="font-kondolar text-2xl font-black uppercase tracking-tight text-ink text-center">
-            Detalles <span style={{ color: "#C8102E" }}>Aloha Property</span>
+            {modal.title1}<span style={{ color: "#C8102E" }}>{modal.title2}</span>
           </h2>
-          {/* X dentro del header — solo desktop */}
           <button
             onClick={onClose}
             aria-label="Cerrar"
@@ -141,12 +83,9 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
 
         {/* Body — scroll interno */}
         <div className="overflow-y-auto flex-1 min-h-0 px-6 py-8 space-y-8">
-          {modalSections.map((section) => (
+          {modal.sections.map((section) => (
             <div key={section.title}>
-              <h3
-                className="text-sm font-bold uppercase tracking-[0.15em] mb-3"
-                style={{ color: "#C8102E" }}
-              >
+              <h3 className="text-sm font-bold uppercase tracking-[0.15em] mb-3" style={{ color: "#C8102E" }}>
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -169,7 +108,7 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
             className="inline-flex items-center justify-center px-10 py-4 text-xs uppercase tracking-[0.15em] font-medium text-cream transition-opacity duration-300 hover:opacity-80"
             style={{ backgroundColor: "#C8102E" }}
           >
-            Sí, quiero el servicio
+            {modal.cta}
           </a>
         </div>
       </motion.div>
@@ -178,9 +117,11 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function AlohaProperty() {
+  const { lang, tr } = useLang();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
   const [modalOpen, setModalOpen] = useState(false);
+  const { property } = tr;
 
   return (
     <>
@@ -196,7 +137,7 @@ export default function AlohaProperty() {
                 animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
                 transition={{ duration: 0.7, delay: 0.3, ease }}
               >
-                Quiero alquilar mi piso en Madrid
+                {property.kicker}
               </motion.p>
 
               <motion.h3
@@ -205,7 +146,7 @@ export default function AlohaProperty() {
                 animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
                 transition={{ duration: 0.7, delay: 0.45, ease }}
               >
-                Aloha <span className="text-cream">Property</span>
+                {property.title1}<span className="text-cream">{property.title2}</span>
               </motion.h3>
 
               <motion.p
@@ -214,20 +155,20 @@ export default function AlohaProperty() {
                 animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
                 transition={{ duration: 0.7, delay: 0.6, ease }}
               >
-                Alquilar no debería ser un segundo trabajo. Nosotros lo gestionamos todo para que tú solo disfrutes de la rentabilidad.
+                {property.intro}
               </motion.p>
 
               <ol className="space-y-5 lg:space-y-6 xl:space-y-8 mb-6 lg:mb-8 xl:mb-12">
-                {benefits.map((b, i) => (
+                {property.benefits.map((b, i) => (
                   <motion.li
-                    key={b.num}
+                    key={nums[i]}
                     className="grid grid-cols-[2.5rem_1fr] gap-4"
                     initial={{ y: 60, opacity: 0 }}
                     animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 + i * 0.15, ease }}
                   >
                     <span className="font-kondolar text-xl font-black text-cream leading-none pt-0.5">
-                      {b.num}
+                      {nums[i]}
                     </span>
                     <div>
                       <h4 className="text-sm font-bold uppercase tracking-wide text-ink mb-1.5">
@@ -245,13 +186,13 @@ export default function AlohaProperty() {
                 className="flex justify-center md:justify-start"
                 initial={{ y: 60, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-                transition={{ duration: 0.7, delay: 0.6 + benefits.length * 0.15, ease }}
+                transition={{ duration: 0.7, delay: 0.6 + property.benefits.length * 0.15, ease }}
               >
                 <button
                   onClick={() => setModalOpen(true)}
                   className="bg-ink text-cream inline-flex items-center justify-center px-8 py-[18px] md:py-4 text-sm md:text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
                 >
-                  ¿Qué hacemos por tu piso?
+                  {property.cta}
                 </button>
               </motion.div>
             </div>
@@ -280,7 +221,7 @@ export default function AlohaProperty() {
       </section>
 
       <AnimatePresence>
-        {modalOpen && <PropertyModal onClose={() => setModalOpen(false)} />}
+        {modalOpen && <PropertyModal onClose={() => setModalOpen(false)} lang={lang} />}
       </AnimatePresence>
     </>
   );

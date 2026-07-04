@@ -4,43 +4,10 @@ import { useState, useRef } from "react";
 
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-
-const faqs = [
-  {
-    q: "¿Cuánto tiempo tardáis en encontrarme piso o habitación?",
-    a: "En la mayoría de los casos tenemos opciones disponibles en menos de 72 horas. Si vienes con tiempo, podemos prepararte una selección personalizada antes de que llegues a Madrid.",
-  },
-  {
-    q: "¿Los pisos vienen amueblados y equipados?",
-    a: "Sí. Todos los alojamientos están totalmente equipados: muebles, electrodomésticos, ropa de cama y utensilios de cocina. Llegas con las maletas y listo.",
-  },
-  {
-    q: "¿Necesito el NIE para firmar el contrato?",
-    a: "No es imprescindible para empezar, con tu pasaporte es suficiente. Te ayudamos con el trámite del NIE, número de cuenta, abono, empadronamiento y otros trámites administrativos para que estés regularizado cuanto antes.",
-  },
-  {
-    q: "¿Recogéis en el aeropuerto aunque llegue fuera del horario habitual?",
-    a: "Sí. Nos adaptamos a tu vuelo en horario laboral. Solo necesitamos los datos de llegada con antelación para coordinar el servicio sin coste adicional.",
-  },
-  {
-    q: "¿En qué zonas de Madrid tenéis pisos?",
-    a: "Trabajamos en toda la ciudad, con especial presencia en barrios universitarios y zonas bien comunicadas como Moncloa, Chamberí, Malasaña, Lavapiés y Salamanca.",
-  },
-  {
-    q: "¿Ayudáis con el empadronamiento, cuenta bancaria y el abono de transporte?",
-    a: "Sí. Te acompañamos en los trámites del día a día: apertura de cuenta bancaria, tarjeta de transporte y cualquier gestión que necesites al llegar.",
-  },
-  {
-    q: "¿Puedo contratar también el servicio de limpieza?",
-    a: "Por supuesto. Contamos con servicio de limpieza periódico y puntual, con opción de lavandería incluida. Pregúntanos por nuestros packs.",
-  },
-  {
-    q: "¿Cómo puedo contactar con vosotros?",
-    a: "Puedes escribirnos a través del formulario de contacto o por WhatsApp. Respondemos en menos de 24 horas en días laborables.",
-  },
-];
+import { useLang } from "@/context/LanguageContext";
 
 export default function FAQ() {
+  const { tr } = useLang();
   const [open, setOpen] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -95,11 +62,11 @@ export default function FAQ() {
           data-faq-title
           className="font-kondolar text-[43px] md:text-[55px] font-black uppercase tracking-tight leading-[0.9] mb-16 text-center text-ink"
         >
-          Preguntas <span className="text-primary">Frecuentes</span>
+          {tr.faq.title1}<span className="text-primary">{tr.faq.title2}</span>
         </h3>
 
         <div className="divide-y divide-ink/10 max-w-3xl mx-auto">
-          {faqs.map((faq, i) => (
+          {tr.faq.items.map((faq, i) => (
             <div key={i} data-faq-item>
               <button
                 className="w-full text-left py-6 grid grid-cols-[1fr_auto] gap-8 items-start group"

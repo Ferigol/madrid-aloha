@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { scrollToSection } from "@/lib/scrollToSection";
-import { siteLinks } from "@/lib/siteLinks";
-
+import { useLang } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, setLang, tr } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -36,7 +36,7 @@ export default function Navbar() {
         </Link>
 
         <ul className="hidden md:flex items-center gap-10">
-          {siteLinks.map((l) => (
+          {tr.nav.links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -50,32 +50,30 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-5">
-          <div className="text-xs uppercase tracking-[0.15em] font-medium select-none">
-            <span className="text-ink">ES</span>
+          <div className="text-xs uppercase tracking-[0.15em] font-medium select-none flex items-center">
+            <button
+              onClick={() => setLang("es")}
+              className={`transition-colors duration-200 ${lang === "es" ? "text-ink font-bold" : "text-ink/40 hover:text-ink/70"}`}
+            >
+              ES
+            </button>
             <span className="mx-1.5 text-ink/20">|</span>
-            <span className="text-ink/30 cursor-not-allowed">EN</span>
+            <button
+              onClick={() => setLang("en")}
+              className={`transition-colors duration-200 ${lang === "en" ? "text-ink font-bold" : "text-ink/40 hover:text-ink/70"}`}
+            >
+              EN
+            </button>
           </div>
 
           <button
             className="md:hidden flex flex-col gap-1.5 p-1"
             onClick={() => setOpen(!open)}
-            aria-label="Abrir menú"
+            aria-label={lang === "es" ? "Abrir menú" : "Open menu"}
           >
-            <span
-              className={`block w-6 h-px bg-ink transition-all duration-300 origin-center ${
-                open ? "rotate-45 translate-y-[7px]" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-px bg-ink transition-all duration-300 ${
-                open ? "opacity-0 scale-x-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-px bg-ink transition-all duration-300 origin-center ${
-                open ? "-rotate-45 -translate-y-[7px]" : ""
-              }`}
-            />
+            <span className={`block w-6 h-px bg-ink transition-all duration-300 origin-center ${open ? "rotate-45 translate-y-[7px]" : ""}`} />
+            <span className={`block w-6 h-px bg-ink transition-all duration-300 ${open ? "opacity-0 scale-x-0" : ""}`} />
+            <span className={`block w-6 h-px bg-ink transition-all duration-300 origin-center ${open ? "-rotate-45 -translate-y-[7px]" : ""}`} />
           </button>
         </div>
       </nav>
@@ -87,7 +85,7 @@ export default function Navbar() {
         }`}
       >
         <ul className="px-6 py-8 flex flex-col gap-6">
-          {siteLinks.map((l) => (
+          {tr.nav.links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}

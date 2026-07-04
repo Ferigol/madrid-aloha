@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { siteLinks } from "@/lib/siteLinks";
+import { useLang } from "@/context/LanguageContext";
 
 const socials = [
   { label: "Instagram", href: "https://instagram.com/madridaloha" },
@@ -9,6 +11,7 @@ const socials = [
 ];
 
 export default function Footer() {
+  const { tr } = useLang();
   return (
     <footer className="text-cream" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -25,14 +28,14 @@ export default function Footer() {
               style={{ filter: "brightness(0) invert(1) sepia(0.08) brightness(0.87)" }}
             />
             <p className="text-sm text-white leading-relaxed max-w-xs">
-              Ayudamos a estudiantes y trabajadores nacionales a encontrar su hogar en Madrid.
+              {tr.footer.description}
             </p>
           </div>
 
           {/* Nav */}
           <div className="md:col-span-2 md:col-start-6">
             <ul className="space-y-3">
-              {siteLinks.map((l) => (
+              {tr.nav.links.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -67,10 +70,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6">
           <p className="text-[10px] tracking-[0.15em] text-white">
-            © 2026 Madrid Aloha · Todos los derechos reservados
+            {tr.footer.copyright}
           </p>
           <p className="text-[10px] tracking-[0.15em] text-white/70">
-            Proyecto creado por:{" "}
+            {tr.footer.createdBy}{" "}
             <a href="https://hostia-agency.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 transition-colors">
               host<span className="uppercase">IA</span>
             </a>

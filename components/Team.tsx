@@ -6,6 +6,7 @@ import { FaLinkedinIn, FaEnvelope } from "react-icons/fa";
 
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { useLang } from "@/context/LanguageContext";
 
 const members = [
   {
@@ -148,6 +149,7 @@ const MemberRow = memo(function MemberRow({
 });
 
 export default function Team() {
+  const { tr } = useLang();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const handleHover = useCallback((id: string | null) => setHoveredId(id), []);
 
@@ -188,7 +190,7 @@ export default function Team() {
 
           {/* Texto: solo visible en móvil, encima de las fotos */}
           <p className="lg:hidden text-base text-ink font-light leading-relaxed">
-            Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
+            {tr.team.description}
           </p>
 
           {/* Fotos — entra desde la izquierda */}
@@ -201,7 +203,7 @@ export default function Team() {
           {/* Columna derecha — entra desde la derecha */}
           <div ref={contentRef} className="flex flex-col pt-2 flex-1">
             <p className="hidden lg:block text-base md:text-lg text-ink font-light leading-relaxed max-w-md">
-              Sabemos lo que es llegar a una ciudad nueva sin conocer a nadie. Nosotros te ayudamos a encontrar el lugar donde sentirte en casa desde el primer día.
+              {tr.team.description}
             </p>
             <div className="flex flex-col gap-12 mt-8 lg:mt-16">
               {members.map((m) => (

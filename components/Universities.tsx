@@ -1,3 +1,6 @@
+"use client";
+import { useLang } from "@/context/LanguageContext";
+
 const logos = [
   { src: "/logo-ie.svg",     alt: "IE Business School" },
   { src: "/logo-iese.svg",   alt: "IESE Business School" },
@@ -14,13 +17,14 @@ const logos = [
 const doubled = [...logos, ...logos];
 
 export default function Universities() {
+  const { tr } = useLang();
   return (
     <section className="bg-primary">
 
       {/* Label */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-16 pb-10">
         <p className="text-[10px] uppercase tracking-[0.25em] text-cream font-medium text-center">
-          Universidades aliadas
+          {tr.universities.label}
         </p>
       </div>
 

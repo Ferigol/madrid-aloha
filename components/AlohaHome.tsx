@@ -4,35 +4,16 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { scrollToSection } from "@/lib/scrollToSection";
-
-const benefits = [
-  {
-    num: "01",
-    title: "Tu piso desde el día uno",
-    desc: "Encontramos tu casa en la zona que quieras, cerca de tu escuela o trabajo, con las comodidades que nos pidas, ajustándonos a tu presupuesto.",
-  },
-  {
-    num: "02",
-    title: "Te recogemos en el aeropuerto",
-    desc: "Tu primera hora en Madrid, sin estrés. Te llevamos directo a tu nuevo hogar.",
-  },
-  {
-    num: "03",
-    title: "Instalado en días, no semanas",
-    desc: "NIE, empadronamiento, cuenta bancaria, abono de transporte. Te ayudamos con todos los trámites para que empieces a disfrutar de esta experiencia cuanto antes.",
-  },
-  {
-    num: "04",
-    title: "Servicio de limpieza",
-    desc: "Contamos con personal de limpieza, pregúntanos por nuestros packs de limpieza, lavado y planchado.",
-  },
-];
+import { useLang } from "@/context/LanguageContext";
 
 const ease = "easeOut" as const;
+const nums = ["01", "02", "03", "04"];
 
 export default function AlohaHome() {
+  const { tr } = useLang();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const { home } = tr;
 
   return (
     <section ref={ref} id="aloha-home" className="bg-cream text-ink min-h-screen flex flex-col justify-center">
@@ -47,7 +28,7 @@ export default function AlohaHome() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease }}
             >
-              Busco dónde vivir en Madrid
+              {home.kicker}
             </motion.p>
 
             <motion.h3
@@ -56,7 +37,7 @@ export default function AlohaHome() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.45, ease }}
             >
-              Aloha <span className="text-primary">Home</span>
+              {home.title1}<span className="text-primary">{home.title2}</span>
             </motion.h3>
 
             <motion.p
@@ -65,28 +46,22 @@ export default function AlohaHome() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.6, ease }}
             >
-              Llegás a Madrid con las maletas. Nosotros ponemos el resto.
+              {home.intro}
             </motion.p>
 
             <ol className="space-y-5 lg:space-y-6 xl:space-y-8 mb-6 lg:mb-8 xl:mb-12">
-              {benefits.map((b, i) => (
+              {home.benefits.map((b, i) => (
                 <motion.li
-                  key={b.num}
+                  key={nums[i]}
                   className="grid grid-cols-[2.5rem_1fr] gap-4"
                   initial={{ y: 60, opacity: 0 }}
                   animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 + i * 0.15, ease }}
                 >
-                  <span className="font-kondolar text-xl font-black text-primary leading-none pt-0.5">
-                    {b.num}
-                  </span>
+                  <span className="font-kondolar text-xl font-black text-primary leading-none pt-0.5">{nums[i]}</span>
                   <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wide text-ink mb-1.5">
-                      {b.title}
-                    </h4>
-                    <p className="text-base md:text-lg leading-relaxed text-ink">
-                      {b.desc}
-                    </p>
+                    <h4 className="text-sm font-bold uppercase tracking-wide text-ink mb-1.5">{b.title}</h4>
+                    <p className="text-base md:text-lg leading-relaxed text-ink">{b.desc}</p>
                   </div>
                 </motion.li>
               ))}
@@ -96,20 +71,20 @@ export default function AlohaHome() {
               className="flex justify-center md:justify-start"
               initial={{ y: 60, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
-              transition={{ duration: 0.7, delay: 0.6 + benefits.length * 0.15, ease }}
+              transition={{ duration: 0.7, delay: 0.6 + home.benefits.length * 0.15, ease }}
             >
               <a
                 href="#contacto"
                 className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-[18px] md:py-4 text-sm md:text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
                 onClick={(e) => { e.preventDefault(); scrollToSection("contacto"); }}
               >
-                Buscar mi piso ahora
+                {home.cta}
               </a>
             </motion.div>
           </div>
 
           {/* RIGHT: image */}
-          <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-[min(860px,78vh)]" style={{ overflow: 'clip' }}>
+          <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-[min(860px,78vh)]" style={{ overflow: "clip" }}>
             <motion.div
               className="absolute inset-0"
               initial={{ y: 80, opacity: 0 }}

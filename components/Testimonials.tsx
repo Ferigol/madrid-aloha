@@ -5,29 +5,12 @@ import { FaStar } from "react-icons/fa";
 
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { useLang } from "@/context/LanguageContext";
 
-const testimonials = [
-  {
-    img: "/testimonio-carlos.webp",
-    name: "Gabriel Ochoa Jara",
-    role: "Máster ADE · México",
-    quote:
-      "Excelente servicio de principio a fin. 100% recomendado. Rebeca es una excelente profesional y persona. El piso que alquilas es tal cual te lo muestra en fotos.",
-  },
-  {
-    img: "/testimonio-clara.webp",
-    name: "Clara Tennyson",
-    role: "Posgrado de Economía · Chile",
-    quote:
-      "Recomiendo al 100% esta increíble empresa, me ayudó a encontrar el apartamento de mis sueños. Rebeca y Juan Carlos son unos cracks. Gracias chicos.",
-  },
-  {
-    img: "https://i.pravatar.cc/150?img=11",
-    name: "Martín Fernández",
-    role: "Posgrado de Derecho · Argentina",
-    quote:
-      "Llegué a Madrid un jueves y 3 días antes ya tenía mi habitación firmada. Rebeca es muy profesional y consiguió exactamente el espacio que quería.",
-  },
+const imgs = [
+  "/testimonio-carlos.webp",
+  "/testimonio-clara.webp",
+  "https://i.pravatar.cc/150?img=11",
 ];
 
 function Stars() {
@@ -41,6 +24,7 @@ function Stars() {
 }
 
 export default function Testimonials() {
+  const { tr } = useLang();
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -87,15 +71,15 @@ export default function Testimonials() {
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t) => (
-            <div key={t.name} data-card className="relative flex flex-col items-center pt-14 group">
+          {tr.testimonials.items.map((item, i) => (
+            <div key={item.name} data-card className="relative flex flex-col items-center pt-14 group">
 
               {/* Floating avatar */}
               <div data-avatar className="absolute -top-0 left-1/2 -translate-x-1/2 z-10">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={t.img}
-                  alt={t.name}
+                  src={imgs[i]}
+                  alt={item.name}
                   className="w-24 h-24 rounded-full object-cover border-4 border-cream shadow-md grayscale group-hover:grayscale-0 transition-[filter] duration-500"
                 />
               </div>
@@ -105,15 +89,15 @@ export default function Testimonials() {
                 <Stars />
 
                 <p className="text-base leading-relaxed text-ink mb-8 font-light">
-                  "{t.quote}"
+                  &ldquo;{item.quote}&rdquo;
                 </p>
 
                 <div className="border-t border-ink/10 pt-6">
                   <p className="text-sm font-semibold uppercase tracking-wide text-ink">
-                    {t.name}
+                    {item.name}
                   </p>
                   <p className="text-[10px] uppercase tracking-[0.15em] text-ink mt-1">
-                    {t.role}
+                    {item.role}
                   </p>
                 </div>
               </div>

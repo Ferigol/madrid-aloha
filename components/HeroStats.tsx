@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLang } from "@/context/LanguageContext";
 
-const stats = [
-  { target: 772, label: "Estudiantes\nalojados",        delay: 0   },
-  { target: 221, label: "Empresarios y\ntrabajadores",  delay: 180 },
-  { target: 9,   label: "Años de\nexperiencia",         delay: 360 },
-];
-
+const targets = [772, 221, 9];
+const delays  = [0, 180, 360];
 const DURATION = 1800;
 
 function easeOutExpo(t: number): number {
@@ -15,8 +12,9 @@ function easeOutExpo(t: number): number {
 }
 
 export default function HeroStats() {
+  const { tr } = useLang();
   const sectionRef = useRef<HTMLElement>(null);
-  const [values, setValues]   = useState([0, 0, 0]);
+  const [values, setValues] = useState([0, 0, 0]);
   const triggeredRef = useRef(false);
 
   useEffect(() => {
@@ -31,26 +29,21 @@ export default function HeroStats() {
         const rafs: number[] = [];
         const timeouts: ReturnType<typeof setTimeout>[] = [];
 
-        stats.forEach(({ target, delay }, i) => {
+        targets.forEach((target, i) => {
           const t = setTimeout(() => {
             const t0 = performance.now();
-
             const tick = (now: number) => {
               const progress = Math.min((now - t0) / DURATION, 1);
               const eased    = easeOutExpo(progress);
-
               setValues(prev => {
                 const next = [...prev];
                 next[i] = Math.round(eased * target);
                 return next;
               });
-
               if (progress < 1) rafs[i] = requestAnimationFrame(tick);
             };
-
             rafs[i] = requestAnimationFrame(tick);
-          }, delay);
-
+          }, delays[i]);
           timeouts.push(t);
         });
 
@@ -70,8 +63,8 @@ export default function HeroStats() {
     <section ref={sectionRef} className="bg-primary">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-12">
         <div className="grid grid-cols-3 divide-x divide-cream/20">
-          {stats.map((s, i) => (
-            <div key={s.label} className="flex flex-col items-center text-center px-4">
+          {tr.heroStats.map((s, i) => (
+            <div key={i} className="flex flex-col items-center text-center px-4">
               <p className="font-kondolar text-4xl sm:text-5xl md:text-6xl font-black text-cream leading-none tabular-nums">
                 +{values[i]}
               </p>
