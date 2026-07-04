@@ -194,7 +194,7 @@ export default function Team() {
           </p>
 
           {/* Fotos — entra desde la izquierda */}
-          <div ref={photosRef} className="flex gap-4 md:gap-6 flex-shrink-0">
+          <div ref={photosRef} className="flex gap-4 md:gap-6 flex-shrink-0 justify-center lg:justify-start w-full lg:w-auto">
             {members.map((m, i) => (
               <PhotoCard key={m.id} member={m} offset={photoOffsets[i]} hoveredId={hoveredId} onHover={handleHover} />
             ))}
