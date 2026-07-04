@@ -69,12 +69,18 @@ const modalSections = [
 const ease = "easeOut" as const;
 
 function PropertyModal({ onClose }: { onClose: () => void }) {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
     return () => {
+      window.removeEventListener("resize", check);
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
     };
@@ -92,11 +98,11 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
         onClick={onClose}
       />
 
-      {/* Card con posición fixed explícita: top=80px, bottom=20px */}
+      {/* Card */}
       <motion.div
         className="fixed z-[201] bg-white flex flex-col rounded-sm shadow-2xl"
         style={{
-          top: '230px',
+          top: isMobile ? '80px' : '230px',
           bottom: '20px',
           left: 0,
           right: 0,
@@ -108,15 +114,25 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
         exit={{ opacity: 0, y: 16 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
+        {/* X flotante encima del popup — solo móvil */}
+        <button
+          onClick={onClose}
+          aria-label="Cerrar"
+          className="md:hidden absolute -top-10 right-0 w-9 h-9 flex items-center justify-center text-white text-2xl leading-none"
+        >
+          ✕
+        </button>
+
         {/* Header — siempre visible */}
         <div className="flex-shrink-0 bg-white border-b border-ink/10 px-6 py-5 relative flex items-center justify-center">
           <h2 className="font-kondolar text-2xl font-black uppercase tracking-tight text-ink text-center">
             Detalles <span style={{ color: "#C8102E" }}>Aloha Property</span>
           </h2>
+          {/* X dentro del header — solo desktop */}
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="absolute right-4 w-8 h-8 flex items-center justify-center text-ink/50 hover:text-ink transition-colors text-xl leading-none"
+            className="hidden md:flex absolute right-4 w-8 h-8 items-center justify-center text-ink/50 hover:text-ink transition-colors text-xl leading-none"
           >
             ✕
           </button>
