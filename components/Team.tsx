@@ -3,11 +3,9 @@
 import { memo, useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { FaLinkedinIn, FaEnvelope } from "react-icons/fa";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useGSAP } from "@gsap/react";
 
 const members = [
   {

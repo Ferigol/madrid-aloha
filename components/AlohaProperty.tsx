@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const benefits = [
   {
@@ -164,7 +165,7 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
         <div className="flex-shrink-0 px-6 py-6 text-center border-t border-ink/10">
           <a
             href="#contacto"
-            onClick={onClose}
+            onClick={(e) => { e.preventDefault(); onClose(); scrollToSection("contacto"); }}
             className="inline-flex items-center justify-center px-10 py-4 text-xs uppercase tracking-[0.15em] font-medium text-cream transition-opacity duration-300 hover:opacity-80"
             style={{ backgroundColor: "#C8102E" }}
           >

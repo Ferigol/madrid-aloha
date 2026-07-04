@@ -1,47 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const navLinks = [
-  { label: "Buscas Casa",  href: "#aloha-home" },
-  { label: "Propietarios", href: "#aloha-property" },
-  { label: "Carta Consular", href: "#aloha-cleaning" },
-  { label: "Equipo",        href: "#equipo" },
-  { label: "FAQ",          href: "#faq" },
-  { label: "Contacto",     href: "#contacto" },
-];
+import { siteLinks } from "@/lib/siteLinks";
 
 const socials = [
-  {
-    label: "Instagram",
-    href: "https://instagram.com/madridaloha",
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/company/madridaloha",
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com/madridaloha",
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-      </svg>
-    ),
-  },
+  { label: "Instagram", href: "https://instagram.com/madridaloha" },
+  { label: "LinkedIn",  href: "https://linkedin.com/company/madridaloha" },
+  { label: "Facebook",  href: "https://facebook.com/madridaloha" },
 ];
 
 export default function Footer() {
@@ -68,7 +32,7 @@ export default function Footer() {
           {/* Nav */}
           <div className="md:col-span-2 md:col-start-6">
             <ul className="space-y-3">
-              {navLinks.map((l) => (
+              {siteLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}

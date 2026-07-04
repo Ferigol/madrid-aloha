@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 const benefits = [
   {
@@ -98,18 +98,13 @@ export default function AlohaCleaning() {
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.6 + benefits.length * 0.15, ease }}
             >
-              <Link
+              <a
                 href="#contacto"
                 className="bg-gradient-to-r from-[#ce304e] to-[#ce214a] inline-flex items-center justify-center text-cream px-8 py-[18px] md:py-4 text-sm md:text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById('contacto');
-                  if (!el) return;
-                  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
-                }}
+                onClick={(e) => { e.preventDefault(); scrollToSection("contacto"); }}
               >
                 Reserva y recibe tu carta
-              </Link>
+              </a>
             </motion.div>
           </div>
 

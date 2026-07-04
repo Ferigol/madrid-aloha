@@ -2,11 +2,17 @@
 
 import { useRef, useState } from "react";
 import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+function ChevronDown({ className = "" }: { className?: string }) {
+  return (
+    <svg className={`pointer-events-none ${className}`} width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useGSAP } from "@gsap/react";
 
 const options = [
   "Busco habitación / piso",
@@ -321,9 +327,7 @@ export default function Contact() {
                           </option>
                         ))}
                       </select>
-                      <svg className="pointer-events-none absolute right-0 text-cream/60" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                      <ChevronDown className="absolute right-0 text-cream/60" />
                     </div>
                     <span className="text-cream/20 shrink-0">|</span>
                     <input
@@ -351,9 +355,7 @@ export default function Contact() {
                       <option key={o} value={o} className="text-ink">{o}</option>
                     ))}
                   </select>
-                  <svg className="pointer-events-none absolute right-0 bottom-4 text-cream/60" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <ChevronDown className="absolute right-0 bottom-4 text-cream/60" />
                   <ErrorMsg msg={touched.type ? errors.type ?? "" : ""} />
                 </div>
 

@@ -3,22 +3,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { scrollToSection } from "@/lib/scrollToSection";
+import { siteLinks } from "@/lib/siteLinks";
 
-const links = [
-  { label: "Buscas Casa", href: "#aloha-home" },
-  { label: "Propietarios", href: "#aloha-property" },
-  { label: "Carta Consular", href: "#aloha-cleaning" },
-  { label: "Equipo", href: "#equipo" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contacto", href: "#contacto" },
-];
-
-function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - 64;
-  window.scrollTo({ top, behavior: "smooth" });
-}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -49,7 +36,7 @@ export default function Navbar() {
         </Link>
 
         <ul className="hidden md:flex items-center gap-10">
-          {links.map((l) => (
+          {siteLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -100,7 +87,7 @@ export default function Navbar() {
         }`}
       >
         <ul className="px-6 py-8 flex flex-col gap-6">
-          {links.map((l) => (
+          {siteLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}

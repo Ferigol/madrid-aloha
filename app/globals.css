@@ -2,7 +2,6 @@
 
 @theme inline {
   --color-primary: #ce304e;
-  --color-secondary: #5cba94;
   --color-cream: #deddd9;
   --color-ink: #1a1208;
   --color-white: #ffffff;
@@ -76,10 +75,4 @@ h3,
 
 .animate-line-reveal-2 {
   animation: line-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
-}
-
-.btn-gradient:hover {
-  background-image: none;
-  background-color: var(--color-cream);
-  color: var(--color-primary);
 }
