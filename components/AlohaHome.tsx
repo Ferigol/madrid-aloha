@@ -9,7 +9,7 @@ const benefits = [
   {
     num: "01",
     title: "Tu piso desde el día uno",
-    desc: "Encontramos tu casa cerca de tu escuela o trabajo y en las zonas que quieras y con los requisitos que nos pidas, ajustándonos a tu presupuesto.",
+    desc: "Encontramos tu casa en la zona que quieras, cerca de tu escuela o trabajo, con las comodidades que nos pidas, ajustándonos a tu presupuesto.",
   },
   {
     num: "02",

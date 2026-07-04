@@ -61,25 +61,8 @@ export default function Footer() {
               style={{ filter: "brightness(0) invert(1) sepia(0.08) brightness(0.87)" }}
             />
             <p className="text-sm text-white leading-relaxed max-w-xs">
-              Ayudamos a estudiantes y trabajadores internacionales a encontrar su hogar en Madrid.
+              Ayudamos a estudiantes y trabajadores nacionales a encontrar su hogar en Madrid.
             </p>
-            <div className="flex items-center gap-5 mt-6">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="text-white hover:text-white/70 transition-colors"
-                >
-                  {/* Mobile: icono sin borde */}
-                  <span className="md:hidden">{s.icon}</span>
-                  {/* Desktop: texto en bold */}
-                  <span className="hidden md:inline text-[14px] font-bold uppercase tracking-wide">{s.label}</span>
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Nav */}
@@ -98,11 +81,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Socials */}
           <div className="md:col-span-3 md:col-start-10">
-            <div className="space-y-3">
-<a href="https://wa.me/34604378361" target="_blank" rel="noopener noreferrer" className="text-sm text-white hover:text-white/70 transition-colors">+34 604 378 361</a>
-              <p className="text-sm text-white">Los Madroños 22, Madrid</p>
+            <div className="flex flex-col gap-3">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-white hover:text-white/70 transition-colors"
+                >
+                  <span className="md:hidden">{s.icon}</span>
+                  <span className="hidden md:inline text-[14px] font-bold uppercase tracking-wide">{s.label}</span>
+                </a>
+              ))}
             </div>
           </div>
         </div>

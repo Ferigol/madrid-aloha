@@ -81,29 +81,35 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-    >
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-ink/70 backdrop-blur-sm"
+    <>
+      {/* Backdrop independiente */}
+      <motion.div
+        className="fixed inset-0 z-[200] bg-ink/70 backdrop-blur-sm"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
         onClick={onClose}
       />
 
-      {/* Card */}
+      {/* Card con posición fixed explícita: top=80px, bottom=20px */}
       <motion.div
-        className="relative z-10 bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-sm shadow-2xl"
-        initial={{ opacity: 0, y: 32, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 16, scale: 0.97 }}
+        className="fixed z-[201] bg-white flex flex-col rounded-sm shadow-2xl"
+        style={{
+          top: '230px',
+          bottom: '20px',
+          left: 0,
+          right: 0,
+          margin: '0 auto',
+          width: 'min(672px, calc(100vw - 32px))',
+        }}
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
-        {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-ink/10 px-6 py-5 relative flex items-center justify-center z-10">
+        {/* Header — siempre visible */}
+        <div className="flex-shrink-0 bg-white border-b border-ink/10 px-6 py-5 relative flex items-center justify-center">
           <h2 className="font-kondolar text-2xl font-black uppercase tracking-tight text-ink text-center">
             Detalles <span style={{ color: "#C8102E" }}>Aloha Property</span>
           </h2>
@@ -116,8 +122,8 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Body */}
-        <div className="px-6 py-8 space-y-8">
+        {/* Body — scroll interno */}
+        <div className="overflow-y-auto flex-1 min-h-0 px-6 py-8 space-y-8">
           {modalSections.map((section) => (
             <div key={section.title}>
               <h3
@@ -136,19 +142,21 @@ function PropertyModal({ onClose }: { onClose: () => void }) {
               </ul>
             </div>
           ))}
-          <div className="px-6 pb-8 text-center">
-            <a
-              href="#contacto"
-              onClick={onClose}
-              className="inline-flex items-center justify-center px-10 py-4 text-xs uppercase tracking-[0.15em] font-medium text-cream transition-opacity duration-300 hover:opacity-80"
-              style={{ backgroundColor: "#C8102E" }}
-            >
-              Sí, quiero el servicio
-            </a>
-          </div>
+        </div>
+
+        {/* Footer — siempre visible */}
+        <div className="flex-shrink-0 px-6 py-6 text-center border-t border-ink/10">
+          <a
+            href="#contacto"
+            onClick={onClose}
+            className="inline-flex items-center justify-center px-10 py-4 text-xs uppercase tracking-[0.15em] font-medium text-cream transition-opacity duration-300 hover:opacity-80"
+            style={{ backgroundColor: "#C8102E" }}
+          >
+            Sí, quiero el servicio
+          </a>
         </div>
       </motion.div>
-    </motion.div>
+    </>
   );
 }
 
