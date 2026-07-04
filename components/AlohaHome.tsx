@@ -93,6 +93,7 @@ export default function AlohaHome() {
             </ol>
 
             <motion.div
+              className="md:flex md:justify-center"
               initial={{ y: 60, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
               transition={{ duration: 0.7, delay: 0.6 + benefits.length * 0.15, ease }}
