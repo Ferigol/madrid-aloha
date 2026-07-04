@@ -96,16 +96,16 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         className={`md:hidden bg-cream border-b border-ink/10 overflow-hidden transition-all duration-300 ${
-          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[480px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="px-6 py-8 flex flex-col gap-7">
+        <ul className="px-6 py-8 flex flex-col gap-6">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
                 onClick={(e) => { e.preventDefault(); scrollToSection(l.href.slice(1)); setOpen(false); }}
-                className="text-sm uppercase tracking-[0.15em] font-medium text-ink hover:text-primary transition-colors cursor-pointer"
+                className="text-2xl uppercase tracking-[0.15em] font-medium text-ink hover:text-primary transition-colors cursor-pointer"
               >
                 {l.label}
               </a>
