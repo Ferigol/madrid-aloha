@@ -67,7 +67,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6">
           <p className="text-[10px] tracking-[0.15em] text-white">
-            © 2025 Madrid Aloha · Todos los derechos reservados
+            © 2026 Madrid Aloha · Todos los derechos reservados
           </p>
           <p className="text-[10px] tracking-[0.15em] text-white/70">
             Proyecto creado por:{" "}
