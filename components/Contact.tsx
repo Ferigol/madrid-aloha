@@ -162,9 +162,13 @@ function ErrorMsg({ msg }: { msg: string }) {
   );
 }
 
+const WEB3FORMS_ACCESS_KEY = "d2f9c664-8859-49a0-a9cb-fb5e1b294152";
+
+type Status = "idle" | "sending" | "sent" | "error";
+
 export default function Contact() {
   const { tr } = useLang();
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef    = useRef<HTMLDivElement>(null);
 
@@ -210,7 +214,7 @@ export default function Contact() {
     setErrors(getErrors(form));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const allTouched = Object.fromEntries(
       (Object.keys(form) as (keyof FormFields)[]).map((k) => [k, true])
@@ -219,7 +223,26 @@ export default function Contact() {
     const errs = getErrors(form);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
-    setSent(true);
+
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: form.name,
+          email: form.email,
+          phone: `${form.dialCode} ${form.phone}`,
+          subject: form.type,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      setStatus(data.success ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   const inputBase =
@@ -254,7 +277,7 @@ export default function Contact() {
 
           {/* Right */}
           <div ref={formRef} className="lg:col-span-8">
-            {sent ? (
+            {status === "sent" ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
                 <span className="text-6xl font-black text-cream/20 mb-4">✓</span>
                 <h4 className="font-kondolar text-2xl font-black uppercase tracking-tight mb-3">{tr.contact.sent}</h4>
@@ -357,12 +380,18 @@ export default function Contact() {
                   <ErrorMsg msg={touched.message ? errors.message ?? "" : ""} />
                 </div>
 
-                <div className="pt-4 flex justify-end">
+                <div className="pt-4 flex flex-col items-end gap-3">
+                  {status === "error" && (
+                    <p className="text-[11px] tracking-wide text-red-300 flex items-center gap-1">
+                      <span>⚠</span> {tr.contact.submitError}
+                    </p>
+                  )}
                   <button
                     type="submit"
-                    className="bg-ink text-cream inline-flex items-center gap-3 px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80 group"
+                    disabled={status === "sending"}
+                    className="bg-ink text-cream inline-flex items-center gap-3 px-8 py-4 text-xs uppercase tracking-[0.15em] font-medium transition-opacity duration-300 hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed group"
                   >
-                    {tr.contact.send}
+                    {status === "sending" ? tr.contact.sending : tr.contact.send}
                     <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </button>
                 </div>

@@ -218,6 +218,7 @@ const t = {
       send: "Enviar mensaje",
       sending: "Enviando...",
       success: "Te responderemos en\nmenos de 24 horas.\n¡Gracias!",
+      submitError: "No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.",
       errors: {
         name: "El nombre es obligatorio",
         email: "Introduce un correo válido",
@@ -451,6 +452,7 @@ const t = {
       send: "Send message",
       sending: "Sending...",
       success: "We'll get back to you\nwithin 24 hours.\nThank you!",
+      submitError: "We couldn't send your message. Please try again or reach us on WhatsApp.",
       errors: {
         name: "Name is required",
         email: "Please enter a valid email",
