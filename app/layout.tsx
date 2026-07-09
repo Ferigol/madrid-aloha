@@ -46,6 +46,9 @@ export const metadata: Metadata = {
       "Si eres estudiante o trabajador te acompañamos a encontrar tu piso o habitación rápido y sin estrés.",
     images: ["/og-madridaloha.jpg"],
   },
+  icons: {
+    icon: "/favico.png",
+  },
 };
 
 export default function RootLayout({
@@ -55,9 +58,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${inter.variable} ${kondolar.variable}`}>
-      <head>
-        <link rel="icon" href="/favico.png" />
-      </head>
       <body><LanguageProvider>{children}</LanguageProvider></body>
     </html>
   );
