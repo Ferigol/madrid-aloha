@@ -19,18 +19,18 @@ const kondolar = localFont({
 export const metadata: Metadata = {
   title: "Madrid Aloha — Tu hogar en Madrid",
   description:
-    "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid. Servicios de hospedaje, gestión de propiedades y limpieza.",
+    "Si eres estudiante o trabajador te acompañamos a encontrar tu piso o habitación rápido y sin estrés.",
   keywords: "hospedaje Madrid, habitación Madrid, piso Madrid, estudiantes Madrid, Aloha Home",
-  metadataBase: new URL("https://madridaloha.vercel.app"),
+  metadataBase: new URL("https://madridaloha.com"),
   openGraph: {
     title: "Madrid Aloha — Tu hogar en Madrid",
     description:
-      "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid.",
-    url: "https://madridaloha.vercel.app",
+      "Si eres estudiante o trabajador te acompañamos a encontrar tu piso o habitación rápido y sin estrés.",
+    url: "https://madridaloha.com",
     siteName: "Madrid Aloha",
     images: [
       {
-        url: "/image-aloha-home.webp",
+        url: "/og-madridaloha.jpg",
         width: 1200,
         height: 800,
         alt: "Madrid Aloha — Tu hogar en Madrid",
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Madrid Aloha — Tu hogar en Madrid",
     description:
-      "Ayudamos a estudiantes y trabajadores a encontrar piso o habitación en Madrid.",
-    images: ["/image-aloha-home.webp"],
+      "Si eres estudiante o trabajador te acompañamos a encontrar tu piso o habitación rápido y sin estrés.",
+    images: ["/og-madridaloha.jpg"],
   },
 };
 
