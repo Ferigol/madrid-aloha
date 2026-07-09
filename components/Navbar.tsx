@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { scrollToSection } from "@/lib/scrollToSection";
 import { useLang } from "@/context/LanguageContext";
 
@@ -24,7 +23,11 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-[1400px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between border-b border-ink/10">
-        <Link href="/" className="flex items-center">
+        <a
+          href="/"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          className="flex items-center"
+        >
           <Image
             src="/logo-ma.svg"
             alt="Madrid Aloha"
@@ -33,7 +36,7 @@ export default function Navbar() {
             className="h-10 w-auto"
             priority
           />
-        </Link>
+        </a>
 
         <ul className="hidden md:flex items-center gap-10">
           {tr.nav.links.map((l) => (
